@@ -50,7 +50,6 @@ TURRET_DATA = [
 ENEMY_COUNT = [
     { # wave 1
     "zombie":3,
-    "skeleton":100
     },
 
     { # wave 2

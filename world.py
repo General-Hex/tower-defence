@@ -37,7 +37,8 @@ class World():
         self.money = MONEY
         self.enemyList = []
         
-        with open('Year 12 ATAR/Project 1/sprite images/map1.json') as file:
+        #with open('Year 12 ATAR/Project 1/sprite images/map1.json') as file:
+        with open('sprite images/map1.json') as file:
             self.worldData = json.load(file)
         self.__image = Try_Load('map1.png', 'image')
         self.waypoints = []

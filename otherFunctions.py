@@ -18,57 +18,30 @@ if __name__ == '__main__':
 def Try_Load(file:str, type:str):
     # Loading Image
     if type.lower() == 'image':
-        start = os.getcwd()
-        if 'Project 1' not in start:
-            if 'Year 12 ATAR' not in start:
-                full_path = start+'/Year 12 ATAR/Project 1/sprite images/'+str(file)
-            else:
-                full_path = start+'/Project 1/sprite images/'+str(file)
-            try:
-                image = pygame.image.load(os.path.relpath(full_path, start)).convert()
-            except FileNotFoundError:
-                print("Error", file, "file not found, please ensure it is in this working directory with the correct name")
-                quit()
-        else:
+        try: 
             image = pygame.image.load(os.path.relpath('sprite images/'+str(file))).convert()
+        except FileNotFoundError:
+            print("Error", file, "file not found, please ensure it is in this working directory with the correct name")
+            quit()
         return image
     
     # Loading Music
     elif type.lower() == 'music':
-        start = os.getcwd()
-        if 'Project 1' not in start:
-            if 'Year 12 ATAR' not in start:
-                full_path = start+'/Year 12 ATAR/Project 1/Sound Assets/'+str(file)
-            else:
-                full_path = start+'/Project 1/Sound Assets/'+str(file)
-        
-            try:
-                music = pygame.mixer.music.load(os.path.relpath(full_path, start))
-            except FileNotFoundError:
-                print("Error", file, "file not found, please ensure it is in this working directory with the correct name")
-                quit()
-        else:
+        try:
             music = pygame.mixer.music.load('Sound Assets/' + str(file))
+        except FileNotFoundError:
+            print("Error", file, "file not found, please ensure it is in this working directory with the correct name")
+            quit()
         
         return music
 
     # Loading Sound Effect
     elif type.lower() == 'sound':
-        start = os.getcwd()
-        if 'Project 1' not in start:
-
-            if 'Year 12 ATAR' not in start:
-                full_path = start+'/Year 12 ATAR/Project 1/Sound Assets/'+str(file)
-            else:
-                full_path = start+'/Project 1/Sound Assets/'+str(file)
-            try:
-                sound = pygame.mixer.Sound(os.path.relpath(full_path, start))
-            except FileNotFoundError:
-                print("Error", file, "file not found, please ensure it is in this working directory with the correct name")
-                quit()
-        else:
+        try:
             sound = pygame.mixer.Sound('Sound Assets/' + str(file))
-        
+        except FileNotFoundError:
+            print("Error", file, "file not found, please ensure it is in this working directory with the correct name")
+            quit()
         return sound
 
 # Adding Text to Display

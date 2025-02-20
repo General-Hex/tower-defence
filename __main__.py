@@ -199,10 +199,16 @@ while "POTATO":
         addText(SCREEN, "HP: " + str(world.health), FONT3, (255, 255, 255),SCREEN_WIDTH + 50, SCREEN_HEIGHT - 80)
         addText(SCREEN, "WAVE: " + str(world.wave), FONT3, (255, 255, 255),SCREEN_WIDTH + 50, SCREEN_HEIGHT - 60)
         if selectedTurret:
-            addText(SCREEN, "Damage: " + str(selectedTurret.damage), FONT3, (255, 255, 255),SCREEN_WIDTH + 45, SCREEN_HEIGHT - 450)
-            addText(SCREEN, "Range: " + str(selectedTurret.range), FONT3, (255, 255, 255),SCREEN_WIDTH + 45, SCREEN_HEIGHT - 410)
-            addText(SCREEN, "Cooldown: " + str(selectedTurret.cooldown) + "ms", FONT3, (255, 255, 255), SCREEN_WIDTH + 45, SCREEN_HEIGHT -370)
-            addText(SCREEN, "Tier: " + str(selectedTurret.tier), FONT3, (255, 255, 255),SCREEN_WIDTH + 45, SCREEN_HEIGHT - 330)
+            addText(SCREEN, "Damage: " + str(selectedTurret.damage), FONT3, (255, 255, 255),SCREEN_WIDTH + 15, SCREEN_HEIGHT - 450)
+            addText(SCREEN, "Range: " + str(selectedTurret.range), FONT3, (255, 255, 255),SCREEN_WIDTH + 15, SCREEN_HEIGHT - 410)
+            addText(SCREEN, "Cooldown: " + str(selectedTurret.data[selectedTurret.tier - 1].get("cooldown")) + "ms", FONT3, (255, 255, 255), SCREEN_WIDTH + 15, SCREEN_HEIGHT -370)
+            addText(SCREEN, "Tier: " + str(selectedTurret.tier) + "/4", FONT3, (255, 255, 255),SCREEN_WIDTH + 15, SCREEN_HEIGHT - 330)
+
+            if selectedTurret.tier < 4:
+                addText(SCREEN, "+" + str(selectedTurret.data[selectedTurret.tier].get("damage") - selectedTurret.damage), FONT3, (144, 238, 144),SCREEN_WIDTH + 175, SCREEN_HEIGHT - 450)
+                addText(SCREEN, "+" + str(selectedTurret.data[selectedTurret.tier].get("range") - selectedTurret.range), FONT3, (144, 238, 144),SCREEN_WIDTH + 175, SCREEN_HEIGHT - 410)
+                addText(SCREEN, "-" + str(selectedTurret.data[selectedTurret.tier - 1].get("cooldown") - selectedTurret.data[selectedTurret.tier].get("cooldown")) + "ms", FONT3, (144, 238, 144), SCREEN_WIDTH + 215, SCREEN_HEIGHT -370)
+                #addText(SCREEN, "Tier: " + str(selectedTurret.tier), FONT3, (255, 255, 255),SCREEN_WIDTH + 45, SCREEN_HEIGHT - 330)
         
         if doubleSpeed:
             speedButton.MouseCheck(SCREEN, newText="1x Speed")

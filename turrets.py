@@ -64,27 +64,23 @@ class Turret(pygame.sprite.Sprite):
         self.__doubleSpeed = False
         
         # Turret Image
-        #self.allTurretSheets = allTurretSheets
         self.allTurretSheets = []
-        # for i in range(4):
-        #     turretSheet = Try_Load('/Turret Assets/cannon_tier_'+ str(i + 1) + '.png', 'image')
-        #     self.allTurretSheets.append(turretSheet)
 
-        self.animationImages = None #self.loadImages(self.allTurretSheets[self.tier - 1])
+        self.animationImages = None 
         self.imageIndex = 0
         self.rotationAngle = 90
-        self.originalImage = None #self.animationImages[self.imageIndex]
-        self.image = None#pygame.transform.rotate(self.originalImage, self.rotationAngle)
-        self.rect = None#self.image.get_rect()
-        #self.rect.center =self.x, self.y)
+        self.originalImage = None 
+        self.image = None
+        self.rect = None
         
+    def setupRange(self):
         # Turret Range Circle
         self.rangeImage = pygame.Surface((self.range * 2, self.range * 2 ))
         self.rangeImage.fill((0, 0, 0))
         self.rangeImage.set_colorkey((0, 0, 0))
         pygame.draw.circle(self.rangeImage, (220, 220, 220), (self.range, self.range), self.range)
         self.rangeImage.set_alpha(100)
-        self.rangeRect = None
+        self.rangeRect = self.rangeImage.get_rect(center=self.rect.center)
 
     # Updating Turret
     def update(self, allEnemiesGroup:pygame.sprite.Group, doubleSpeed:bool):
@@ -204,7 +200,8 @@ class Cannon(Turret):
         self.image = pygame.transform.rotate(self.originalImage, self.rotationAngle)
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
-        self.rangeRect = self.rangeImage.get_rect(center=self.rect.center)
+        self.setupRange()
+        
 
 class Machinelaser(Turret):
     def __init__(self, tileX:int, tileY:int):
@@ -238,7 +235,7 @@ class Machinelaser(Turret):
         self.image = pygame.transform.rotate(self.originalImage, self.rotationAngle)
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
-        self.rangeRect = self.rangeImage.get_rect(center=self.rect.center)
+        self.setupRange()
 
 
 
@@ -261,6 +258,7 @@ def createTurret(mousePosition:tuple[int,int], allTurretsGroup:pygame.sprite.Gro
                 newTurret = Cannon(tileX, tileY)
             elif turretType == "machinelaser":
                 newTurret = Machinelaser(tileX, tileY)
+
             if world.money - newTurret.cost >= 0:
                 allTurretsGroup.add(newTurret)
                 world.money -= newTurret.cost

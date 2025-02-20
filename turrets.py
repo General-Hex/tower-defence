@@ -75,12 +75,12 @@ class Turret(pygame.sprite.Sprite):
         
     def setupRange(self):
         # Turret Range Circle
-        self.rangeImage = pygame.Surface((self.range * 2, self.range * 2 ))
-        self.rangeImage.fill((0, 0, 0))
-        self.rangeImage.set_colorkey((0, 0, 0))
-        pygame.draw.circle(self.rangeImage, (220, 220, 220), (self.range, self.range), self.range)
-        self.rangeImage.set_alpha(100)
-        self.rangeRect = self.rangeImage.get_rect(center=self.rect.center)
+        self.__rangeImage = pygame.Surface((self.range * 2, self.range * 2 ))
+        self.__rangeImage.fill((0, 0, 0))
+        self.__rangeImage.set_colorkey((0, 0, 0))
+        pygame.draw.circle(self.__rangeImage, (220, 220, 220), (self.range, self.range), self.range)
+        self.__rangeImage.set_alpha(100)
+        self.rangeRect = self.__rangeImage.get_rect(center=self.rect.center)
 
     # Updating Turret
     def update(self, allEnemiesGroup:pygame.sprite.Group, doubleSpeed:bool):
@@ -151,12 +151,12 @@ class Turret(pygame.sprite.Sprite):
         self.cooldown = self.data[self.tier-1].get("cooldown") 
         self.animationImages = self.loadImages(self.allTurretSheets[self.tier - 1])
         self.originalImage = self.animationImages[self.imageIndex]
-        self.rangeImage = pygame.Surface((self.range * 2, self.range * 2 ))
-        self.rangeImage.fill((0, 0, 0))
-        self.rangeImage.set_colorkey((0, 0, 0))
-        pygame.draw.circle(self.rangeImage, (220, 220, 220), (self.range, self.range), self.range)
-        self.rangeImage.set_alpha(100)
-        self.rangeRect = self.rangeImage.get_rect(center=self.rect.center) 
+        self.__rangeImage = pygame.Surface((self.range * 2, self.range * 2 ))
+        self.__rangeImage.fill((0, 0, 0))
+        self.__rangeImage.set_colorkey((0, 0, 0))
+        pygame.draw.circle(self.__rangeImage, (220, 220, 220), (self.range, self.range), self.range)
+        self.__rangeImage.set_alpha(100)
+        self.rangeRect = self.__rangeImage.get_rect(center=self.rect.center) 
         
     # Drawing Turret
     def draw(self, surface:pygame.surface.Surface):
@@ -165,7 +165,7 @@ class Turret(pygame.sprite.Sprite):
         self.rect.center = (self.x, self.y)
 
         if self.selected:
-             surface.blit(self.rangeImage, self.rangeRect)
+             surface.blit(self.__rangeImage, self.rangeRect)
         surface.blit(self.image, self.rect)
          
 class Cannon(Turret):

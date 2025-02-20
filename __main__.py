@@ -113,15 +113,17 @@ turretType = None
 
 # MAIN GAME LOOP
 pygame.display.set_caption("Tower Defence Mayhem")
+Try_Load('main_theme.mp3', 'music')
+pygame.mixer.music.set_volume(0.6)
+pygame.mixer.music.play(loops=-1)
 while "POTATO":
     # Setting FPS
     clock.tick(FPS)
-    
+
     # Checking Buttons
     if cancelButton.MouseClick():
         placingTurrets = False
         
-    
     if buyCannonButton.MouseClick():
         placingTurrets = True
         cursorTurret = Cannon(0, 0)
@@ -152,11 +154,17 @@ while "POTATO":
 
         # Checking Game Loss
         if world.health <= 0:
+            pygame.mixer.music.stop()
+            Try_Load('loss_theme.mp3', 'music')
+            pygame.mixer.music.play(loops=-1)
             gameOver = True
             gameOutcome = -1 
         
         # Checking Game Won
         if world.wave > WAVE_COUNT + 1:
+            pygame.mixer.music.stop()
+            Try_Load('victory_theme.mp3', 'music')
+            pygame.mixer.music.play(loops=-1)
             gameOver = True
             gameOutcome =  1 
 
@@ -166,11 +174,12 @@ while "POTATO":
         if selectedTurret:
             selectedTurret.selected = True
 
-    # Drawing Turrets
-    for turret in allTurrets:
-        turret.draw(SCREEN) 
+    
 
     if not gameOver:
+        # Drawing Turrets
+        for turret in allTurrets:
+            turret.draw(SCREEN) 
         # Drawing Enemies
         if checkCooldown(doubleSpeed):
             if world.spawnedEnemies < len(world.enemyList):
@@ -205,11 +214,18 @@ while "POTATO":
             addText(SCREEN, "Tier: " + str(selectedTurret.tier) + "/4", FONT3, (255, 255, 255),SCREEN_WIDTH + 15, SCREEN_HEIGHT - 330)
 
             if selectedTurret.tier < 4:
-                addText(SCREEN, "+" + str(selectedTurret.data[selectedTurret.tier].get("damage") - selectedTurret.damage), FONT3, (144, 238, 144),SCREEN_WIDTH + 175, SCREEN_HEIGHT - 450)
-                addText(SCREEN, "+" + str(selectedTurret.data[selectedTurret.tier].get("range") - selectedTurret.range), FONT3, (144, 238, 144),SCREEN_WIDTH + 175, SCREEN_HEIGHT - 410)
-                addText(SCREEN, "-" + str(selectedTurret.data[selectedTurret.tier - 1].get("cooldown") - selectedTurret.data[selectedTurret.tier].get("cooldown")) + "ms", FONT3, (144, 238, 144), SCREEN_WIDTH + 215, SCREEN_HEIGHT -370)
-                #addText(SCREEN, "Tier: " + str(selectedTurret.tier), FONT3, (255, 255, 255),SCREEN_WIDTH + 45, SCREEN_HEIGHT - 330)
-        
+                damageBonus = selectedTurret.data[selectedTurret.tier].get("damage") - selectedTurret.damage
+                rangeBonus = selectedTurret.data[selectedTurret.tier].get("range") - selectedTurret.range
+                cooldownBonus = selectedTurret.data[selectedTurret.tier - 1].get("cooldown") - selectedTurret.data[selectedTurret.tier].get("cooldown")
+                if damageBonus > 0:
+                    addText(SCREEN, "+" + str(damageBonus), FONT3, (144, 238, 144),SCREEN_WIDTH + 175, SCREEN_HEIGHT - 450)
+                
+                if rangeBonus > 0:
+                    addText(SCREEN, "+" + str(rangeBonus), FONT3, (144, 238, 144),SCREEN_WIDTH + 175, SCREEN_HEIGHT - 410)
+                
+                if cooldownBonus > 0:
+                    addText(SCREEN, "-" + str(cooldownBonus) + "ms", FONT3, (144, 238, 144), SCREEN_WIDTH + 215, SCREEN_HEIGHT -370)
+             
         if doubleSpeed:
             speedButton.MouseCheck(SCREEN, newText="1x Speed")
         else:

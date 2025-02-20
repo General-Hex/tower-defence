@@ -8,6 +8,11 @@ skeleton: https://caz-creates-games.itch.io/skeleton
 cannon sfx: https://pixabay.com/sound-effects/search/gun/
 machinelaser sfx: https://pixabay.com/sound-effects/search/laser%20machinegun/
 
+upgrade sfx: https://pixabay.com/sound-effects/search/mechanical%20upgrade/
+
+main/victory/loss themesong: suno.com (AI)
+
+
 challenges:
 getting path data from tile:
     issue: incorrect name used

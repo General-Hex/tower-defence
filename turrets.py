@@ -52,7 +52,7 @@ class Turret(pygame.sprite.Sprite):
         self.upgradeCost = 0
         self.cost = 0 
         self.sfx = Try_Load('gun_shot.wav', 'sound')
-        self.sfx.set_volume(0.1)
+        self.sfx.set_volume(0.5)
         self.tier = 1 
         self.range = 0
         self.cooldown = 0
@@ -62,6 +62,7 @@ class Turret(pygame.sprite.Sprite):
         self.selected = False 
         self.target = None  
         self.__doubleSpeed = False
+        self.__upgradesfx = Try_Load('upgrade_sound.wav', 'sound')
         
         # Turret Image
         self.allTurretSheets = []
@@ -80,7 +81,7 @@ class Turret(pygame.sprite.Sprite):
         self.__rangeImage.set_colorkey((0, 0, 0))
         pygame.draw.circle(self.__rangeImage, (220, 220, 220), (self.range, self.range), self.range)
         self.__rangeImage.set_alpha(100)
-        self.rangeRect = self.__rangeImage.get_rect(center=self.rect.center)
+        self.__rangeRect = self.__rangeImage.get_rect(center=self.rect.center)
 
     # Updating Turret
     def update(self, allEnemiesGroup:pygame.sprite.Group, doubleSpeed:bool):
@@ -156,7 +157,8 @@ class Turret(pygame.sprite.Sprite):
         self.__rangeImage.set_colorkey((0, 0, 0))
         pygame.draw.circle(self.__rangeImage, (220, 220, 220), (self.range, self.range), self.range)
         self.__rangeImage.set_alpha(100)
-        self.rangeRect = self.__rangeImage.get_rect(center=self.rect.center) 
+        self.__rangeRect = self.__rangeImage.get_rect(center=self.rect.center) 
+        self.__upgradesfx.play()
         
     # Drawing Turret
     def draw(self, surface:pygame.surface.Surface):
@@ -165,7 +167,7 @@ class Turret(pygame.sprite.Sprite):
         self.rect.center = (self.x, self.y)
 
         if self.selected:
-             surface.blit(self.__rangeImage, self.rangeRect)
+             surface.blit(self.__rangeImage, self.__rangeRect)
         surface.blit(self.image, self.rect)
          
 class Cannon(Turret):
@@ -185,7 +187,7 @@ class Cannon(Turret):
         self.upgradeCost = 100
         self.cost = 200 
         self.sfx = Try_Load('gun_shot.wav', 'sound')
-        self.sfx.set_volume(0.1)
+        self.sfx.set_volume(0.5)
         self.range = self.data[self.tier-1].get("range")
         self.cooldown = self.data[self.tier-1].get("cooldown")
         self.damage = self.data[self.tier-1].get("damage")
@@ -220,7 +222,7 @@ class Machinelaser(Turret):
         self.upgradeCost = 150
         self.cost = 250 
         self.sfx = Try_Load('laser_shot.wav', 'sound')
-        self.sfx.set_volume(0.1)
+        self.sfx.set_volume(0.5)
         self.range = self.data[self.tier-1].get("range")
         self.cooldown = self.data[self.tier-1].get("cooldown")
         self.damage = self.data[self.tier-1].get("damage")

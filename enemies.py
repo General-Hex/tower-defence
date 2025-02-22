@@ -106,8 +106,17 @@ class Enemy(pygame.sprite.Sprite):
             
         self.rect.center = self.pos
 
-    # def animate(self):
-    #     pass
+# Animating Enemy
+    def animate(self):
+        if self.imageIndex + 1 > 6:
+            self.imageIndex = 1
+        
+        if self.loops % 10 == 0:
+            self.imageIndex += 1
+        
+        self.originalImage = Try_Load("Default Assets/default_sprite " + str(self.imageIndex) + ".png", 'image')
+        self.originalImage.set_colorkey((0, 0, 0), RLEACCEL)
+        self.originalImage = pygame.transform.scale(self.originalImage,(self.originalImage.get_width()//3, self.originalImage.get_height()//3))
 
     # Rotating Enemy Image
     def __updateRotation(self):
@@ -147,7 +156,6 @@ class Zombie(Enemy):
         self.originalImage = Try_Load("Zombie Assets/zombie " + str(self.imageIndex) + ".png", 'image')
         self.originalImage.set_colorkey((0, 0, 0), RLEACCEL)
         self.originalImage = pygame.transform.scale(self.originalImage,(self.originalImage.get_width()//5, self.originalImage.get_height()//5))
-
 
 class Skeleton(Enemy):
     def __init__(self, movementWaypoints:list):

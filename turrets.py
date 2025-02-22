@@ -124,7 +124,7 @@ class Turret(pygame.sprite.Sprite):
         animationImages = [] 
         for i in range(TURRET_ANIMATION_FRAMES):
             frame = spriteSheet.subsurface(i * size, 0, size, size)
-            frame = pygame.transform.scale(frame, (frame.get_width()//1.5, frame.get_height()//1.5 ))
+            frame = pygame.transform.scale(frame, (frame.get_width()//1.5, frame.get_height()//1.5))
             animationImages.append(frame)
 
         return animationImages

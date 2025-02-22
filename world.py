@@ -39,7 +39,7 @@ class World():
         
         #with open('Year 12 ATAR/Project 1/sprite images/map1.json') as file:
         with open('sprite images/map1.json') as file:
-            self.worldData = json.load(file)
+            self.__worldData = json.load(file)
         self.__image = Try_Load('map1.png', 'image')
         self.waypoints = []
         self.tilemap = [] 
@@ -49,7 +49,7 @@ class World():
 
     # Prossesing Data From .json File
     def processData(self):
-        for layer in self.worldData["layers"]:
+        for layer in self.__worldData["layers"]:
             if layer["name"] == "tilemap":
                  self.tilemap = layer["data"]
             elif layer["name"] == "waypoints":

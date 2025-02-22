@@ -41,7 +41,7 @@ class Button(pygame.sprite.Sprite):
             self.__square = None
 
     # Check If Mouse On Button
-    def MouseCheck(self, SCREEN, disabled:bool=False, diabledColour=None, newText=None):
+    def MouseCheck(self, SCREEN, disabled:bool=False, diabledColour:tuple[int, int, int]=None, newText:str=None):
             self.active = True
             if newText:
                 self.__text = self.__font.render(str(newText), self.__textColour, self.__textColour)

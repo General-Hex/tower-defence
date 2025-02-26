@@ -2,7 +2,6 @@
 Author: Ryan Beikrasouli
 ID: 6137
 Date created: 15/02/2025
-Last edited: 17/02/2025
 Futher info: README
 '''
 # IMPORTING MODULES
@@ -16,8 +15,7 @@ except ModuleNotFoundError as err:
 from pygame.sprite import Group
 from pygame.locals import(
     K_ESCAPE, 
-    KEYDOWN,
-    RLEACCEL)
+    KEYDOWN)
 
 try:
     from enemies import Zombie, Skeleton
@@ -78,7 +76,7 @@ SCREEN = pygame.display.set_mode([SCREEN_WIDTH + SIDE_PANNEL, SCREEN_HEIGHT])
 
 # Game Fonts
 FONT = pygame.font.SysFont('Consolas', 80, bold=True)
-FONT3 = pygame.font.SysFont('Consolas', 20, bold=True)
+FONT3 = pygame.font.SysFont('Consolas', 20, bold=False)
 
 # Game Buttons
 buyCannonButton = Button(FONT3, "CANNON: $200", (255, 255, 255), (255, 68, 51), (255, 95, 31), SCREEN_WIDTH + 150, 140, 205, 30, True, True)

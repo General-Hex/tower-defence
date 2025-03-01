@@ -13,7 +13,7 @@ if __name__ == '__main__':
 
 # BUTTON CLASS
 class Button(pygame.sprite.Sprite):
-    def __init__(self, font:pygame.font.Font, text:str, textColour:tuple[int, int, int], onColour:tuple[int, int, int], offColour:tuple[int, int], x:int, y:int, width:int, height:int, square:bool, singleClick:bool):
+    def __init__(self, font:pygame.font.Font, text:str, textColour:tuple[int, int, int], onColour:tuple[int, int, int], offColour:tuple[int, int], x:int, y:int, width:int, height:int, square:bool, singleClick:bool) -> None:
         pygame.sprite.Sprite.__init__(self)
         # BUTTON ATTRIBUTES
         self.__x = x 
@@ -41,7 +41,7 @@ class Button(pygame.sprite.Sprite):
             self.__square = None
 
     # Check If Mouse On Button
-    def MouseCheck(self, SCREEN, disabled:bool=False, diabledColour:tuple[int, int, int]=None, newText:str=None):
+    def MouseCheck(self, SCREEN, disabled:bool=False, diabledColour:tuple[int, int, int]=None, newText:str=None) -> None:
             self.active = True
             if newText:
                 self.__text = self.__font.render(str(newText), self.__textColour, self.__textColour)
@@ -72,7 +72,7 @@ class Button(pygame.sprite.Sprite):
                     SCREEN.blit(self.__textOff, self.__textRect)
             
     # Check If Button Is Clicked
-    def MouseClick(self):
+    def MouseClick(self) -> bool:
         if not pygame.mouse.get_pressed()[0]:
             self.__clicked = False
         

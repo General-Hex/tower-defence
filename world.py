@@ -30,7 +30,7 @@ if __name__ == '__main__':
 
 # WORLD CLASS
 class World():
-    def __init__(self):
+    def __init__(self) -> None:
         # WORLD ATTRIBUTES
         self.wave = 1 
         self.health = BASE_HEALTH
@@ -48,7 +48,7 @@ class World():
         self.missedEnemies = 0
 
     # Prossesing Data From .json File
-    def processData(self):
+    def processData(self) -> None:
         for layer in self.__worldData["layers"]:
             if layer["name"] == "tilemap":
                  self.tilemap = layer["data"]
@@ -59,14 +59,14 @@ class World():
 
     
     # Processing Waypoints from Data
-    def __processWaypoints(self, data:dict):
+    def __processWaypoints(self, data:dict) -> None:
         for point in data:
             x_coordinant = point.get("x")
             y_coordinant = point.get("y") + 70
             self.waypoints.append((x_coordinant, y_coordinant))
 
     # Processing Enemy Spawning
-    def processEnemies(self):
+    def processEnemies(self) -> None:
         if self.wave < WAVE_COUNT + 1:
             enemies = ENEMY_COUNT[self.wave -1]
 
@@ -78,11 +78,11 @@ class World():
         random.shuffle(self.enemyList)
 
     # Checking Wave Compleation
-    def checkWaveFinished(self):
+    def checkWaveFinished(self) -> bool:
         return self.killedEnemies + self.missedEnemies == len(self.enemyList)
     
     # Preparing for New Wave
-    def prepareNewWave(self):
+    def prepareNewWave(self) -> None:
         self.enemyList = []
         self.spawnedEnemies = 0
         self.killedEnemies = 0
@@ -90,7 +90,7 @@ class World():
         self.wave += 1
 
     # Draw World
-    def draw(self, surface:pygame.surface.Surface):
+    def draw(self, surface:pygame.surface.Surface) -> None:
         surface.blit(self.__image, (0, 0))
 
     

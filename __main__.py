@@ -60,7 +60,7 @@ except ModuleNotFoundError as err:
     quit()
 
 # Checking spawn cooldown based on 2x speed
-def checkCooldown(doubleSpeed:bool):
+def checkCooldown(doubleSpeed:bool) -> bool:
     if doubleSpeed:
         return pygame.time.get_ticks() - lastEnemySpawn >= SPAWN_COOLDOWN//2 and levelStarted
     else:

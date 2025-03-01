@@ -15,7 +15,7 @@ if __name__ == '__main__':
 # OTHER FUNCTIONS
 
 # Loading Images/Music with Error Exception if File is Not Found
-def Try_Load(file:str, type:str):
+def Try_Load(file:str, type:str) -> pygame.surface.Surface|pygame.mixer.Sound|None:
     # Loading Image
     if type.lower() == 'image':
         try: 
@@ -28,12 +28,12 @@ def Try_Load(file:str, type:str):
     # Loading Music
     elif type.lower() == 'music':
         try:
-            music = pygame.mixer.music.load('Sound Assets/' + str(file))
+            pygame.mixer.music.load('Sound Assets/' + str(file))
         except FileNotFoundError:
             print("Error", file, "file not found, please ensure it is in this working directory with the correct name")
             quit()
         
-        return music
+        return
 
     # Loading Sound Effect
     elif type.lower() == 'sound':

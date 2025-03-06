@@ -90,7 +90,7 @@ class World():
         self.wave += 1
 
     # Draw World
-    def draw(self, surface:pygame.surface.Surface) -> None:
-        surface.blit(self.__image, (0, 0))
+    def draw(self) -> None:
+        SCREEN.blit(self.__image, (0, 0))
 
     

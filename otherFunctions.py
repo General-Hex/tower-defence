@@ -5,6 +5,8 @@ except ModuleNotFoundError as err:
     print(err)
     print("pygame does not seem to be installed, please install it using: pip install pygame")
     quit()
+
+from constants import SCREEN, SPAWN_COOLDOWN
 import os
 
 # Ensure Correct File Run
@@ -45,6 +47,13 @@ def Try_Load(file:str, type:str) -> pygame.surface.Surface|pygame.mixer.Sound|No
         return sound
 
 # Adding Text to Display
-def addText(screen:pygame.Surface, text:str, font:pygame.font.Font, colour:tuple[int, int, int], x:int, y:int):
+def addText(text:str, font:pygame.font.Font, colour:tuple[int, int, int], x:int, y:int):
     text_image = font.render(text, True, colour)
-    screen.blit(text_image, (x, y))
+    SCREEN.blit(text_image, (x, y))
+
+# Checking Spawn Cooldown Based on 2x Speed
+def checkCooldown(doubleSpeed:bool, lastEnemySpawn:int, levelStarted:bool) -> bool:
+    if doubleSpeed:
+        return pygame.time.get_ticks() - lastEnemySpawn >= SPAWN_COOLDOWN//2 and levelStarted
+    else:
+        return pygame.time.get_ticks() - lastEnemySpawn >= SPAWN_COOLDOWN and levelStarted

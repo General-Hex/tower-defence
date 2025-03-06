@@ -42,34 +42,34 @@ class Button(pygame.sprite.Sprite):
 
     # Check If Mouse On Button
     def MouseCheck(self, SCREEN, disabled:bool=False, diabledColour:tuple[int, int, int]=None, newText:str=None) -> None:
-            self.active = True
-            if newText:
-                self.__text = self.__font.render(str(newText), self.__textColour, self.__textColour)
-                self.__textRect = self.__text.get_rect(center=(self.__x, self.__y))
+        self.active = True
+        if newText:
+            self.__text = self.__font.render(str(newText), self.__textColour, self.__textColour)
+            self.__textRect = self.__text.get_rect(center=(self.__x, self.__y))
 
-            if pygame.mouse.get_pos()[0] in range(self.__x-self.__width//2, self.__x+self.__width//2) and pygame.mouse.get_pos()[1] in range(self.__y-self.__height//2, self.__y+self.__height//2) and not disabled:
-                if self.__squareCheck:
-                    pygame.draw.rect(SCREEN, self.__squareOnColour, self.__square)
-                    SCREEN.blit(self.__text, self.__textRect)
-                
-                else:
-                    SCREEN.blit(self.__textOn, self.__textRect)
+        if pygame.mouse.get_pos()[0] in range(self.__x-self.__width//2, self.__x+self.__width//2) and pygame.mouse.get_pos()[1] in range(self.__y-self.__height//2, self.__y+self.__height//2) and not disabled:
+            if self.__squareCheck:
+                pygame.draw.rect(SCREEN, self.__squareOnColour, self.__square)
+                SCREEN.blit(self.__text, self.__textRect)
             
-            elif disabled:
-                if self.__squareCheck:
-                    pygame.draw.rect(SCREEN, diabledColour, self.__square)
-                    SCREEN.blit(self.__text, self.__textRect)
-                
-                else:
-                    SCREEN.blit(self.__textOn, self.__textRect)
+            else:
+                SCREEN.blit(self.__textOn, self.__textRect)
+        
+        elif disabled:
+            if self.__squareCheck:
+                pygame.draw.rect(SCREEN, diabledColour, self.__square)
+                SCREEN.blit(self.__text, self.__textRect)
+            
+            else:
+                SCREEN.blit(self.__textOn, self.__textRect)
+
+        else:
+            if self.__squareCheck:
+                pygame.draw.rect(SCREEN, self.__squareOffColour, self.__square)
+                SCREEN.blit(self.__text, self.__textRect)
 
             else:
-                if self.__squareCheck:
-                    pygame.draw.rect(SCREEN, self.__squareOffColour, self.__square)
-                    SCREEN.blit(self.__text, self.__textRect)
-
-                else:
-                    SCREEN.blit(self.__textOff, self.__textRect)
+                SCREEN.blit(self.__textOff, self.__textRect)
             
     # Check If Button Is Clicked
     def MouseClick(self) -> bool:

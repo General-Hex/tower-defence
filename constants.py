@@ -3,6 +3,9 @@ if __name__ == '__main__':
     print("Error incorrect file run please run __main__.py")
     quit()
 
+from buttons import Button
+import pygame
+
 # MAIN GAME CONSTANTS
 FPS = 60
 SIDE_PANNEL = 300
@@ -71,3 +74,19 @@ ENEMY_COUNT = [
 
 ]
 WAVE_COUNT = len(ENEMY_COUNT)
+
+# Game Fonts
+FONT = pygame.font.SysFont('Consolas', 80, bold=True)
+FONT3 = pygame.font.SysFont('Consolas', 20, bold=False)
+
+# Main Game Screen
+SCREEN = pygame.display.set_mode([SCREEN_WIDTH + SIDE_PANNEL, SCREEN_HEIGHT])
+
+# Game Buttons
+buyCannonButton:Button = Button(FONT3, "CANNON: $200", (255, 255, 255), (255, 68, 51), (255, 95, 31), SCREEN_WIDTH + 150, 140, 205, 30, True, True)
+buyMachinelaserButton:Button = Button(FONT3, "MACHINELASER: $250", (255, 255, 255), (255, 68, 51), (255, 95, 31), SCREEN_WIDTH + 150, 180, 215, 30, True, True)
+startButton:Button = Button(FONT3, "START WAVE", (255, 255, 255), (0, 255, 0), (0, 220, 0), SCREEN_WIDTH + 150, 100, 155, 30, True, True)
+cancelButton:Button =  Button(FONT3, "Cancel", (255, 255, 255), (255, 0, 0), (255, 95, 31), SCREEN_WIDTH + 150, 220, 75, 30, True, True)
+upgradeButton:Button = Button(FONT3, "Upgrade: $", (255, 255, 255), (255, 68, 51), (255, 95, 31), SCREEN_WIDTH + 150, 460 , 200, 30, True, True)
+restartButton:Button = Button(FONT3, "Restart?", (255, 255, 255), (255, 68, 51), (255, 95, 31), SCREEN_WIDTH//2 + 80, SCREEN_HEIGHT//2, 200, 30, True, True)
+speedButton:Button = Button(FONT3, "2X speed", (255, 255, 255), (255, 68, 51), (255, 95, 31), SCREEN_WIDTH + 150, 500 , 200, 30, True, True)

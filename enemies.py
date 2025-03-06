@@ -1,3 +1,7 @@
+"""
+Module to handle the enemy classes
+"""
+
 # IMPORTING MODULES
 try: 
     import pygame
@@ -38,8 +42,15 @@ if __name__ == '__main__':
 
 # ENEMY CLASS
 class Enemy(pygame.sprite.Sprite):
-    
+    """
+    Base enemy base class
+    """
+
     def __init__(self, movementWaypoints:list) -> None:
+        """
+        Enemy constructor
+        """
+
         pygame.sprite.Sprite.__init__(self)
         # ENEMY ATRIBUTES 
         # General
@@ -69,6 +80,10 @@ class Enemy(pygame.sprite.Sprite):
     
     # Enemy Update
     def update(self, world:World, doubleSpeed:bool) -> None:
+        """
+        Method to update enemy animation and movement
+        """
+
         if doubleSpeed and not self.__speedDoubled:
             self.movementSpeed *= 2
             self.__speedDoubled = True
@@ -85,6 +100,10 @@ class Enemy(pygame.sprite.Sprite):
     
     # Move Enemy
     def __move(self, world:World) -> None:
+        """
+        Method to move enemy to next waypoint
+        """
+
         if self.__nextWaypointIndex <= len(self.__waypoints) - 1:
             self.target = Vector2(self.__waypoints[self.__nextWaypointIndex])
             self.__movement = self.target - self.pos
@@ -108,6 +127,10 @@ class Enemy(pygame.sprite.Sprite):
 
 # Animating Enemy
     def animate(self) -> None:
+        """
+        Method to animate the enemy sprite
+        """
+
         if self.imageIndex + 1 > 6:
             self.imageIndex = 1
         
@@ -120,6 +143,10 @@ class Enemy(pygame.sprite.Sprite):
 
     # Rotating Enemy Image
     def __updateRotation(self) -> None:
+        """
+        Method to update rotation of enemy sprite
+        """
+
         distance = self.target - self.pos
         self.__rotationAngle = math.degrees(math.atan2(-distance[1], distance[0]))
         rotateX = int(self.__rotationAngle) < -175 or int(self.__rotationAngle) > 175
@@ -130,6 +157,10 @@ class Enemy(pygame.sprite.Sprite):
 
     # Checking Health Status
     def __checkAlive(self, world:World) -> None:
+        """
+        Method to check if enemy is still alive
+        """
+
         if self.health <= 0:
             world.money += self.worth
             world.killedEnemies += 1
@@ -137,7 +168,15 @@ class Enemy(pygame.sprite.Sprite):
 
 
 class Zombie(Enemy):
+    """
+    Zombie enemy subclass
+    """
+
     def __init__(self, movementWaypoints:list) -> None:
+        """
+        Zombie constructor
+        """
+
         super().__init__(movementWaypoints)
         self.health = 20
         self.movementSpeed = 1
@@ -147,6 +186,10 @@ class Zombie(Enemy):
     
     # Animating Enemy
     def animate(self) -> None:
+        """
+        Overiding method to animate zombie sprite
+        """
+
         if self.imageIndex + 1 > 8:
             self.imageIndex = 1
         
@@ -158,7 +201,15 @@ class Zombie(Enemy):
         self.originalImage = pygame.transform.scale(self.originalImage,(self.originalImage.get_width()//5, self.originalImage.get_height()//5))
 
 class Skeleton(Enemy):
+    """
+    Skeleton enemy subclass
+    """
+
     def __init__(self, movementWaypoints:list) -> None:
+        """
+        Skeleton constructor
+        """
+
         super().__init__(movementWaypoints)
         self.health = 5
         self.movementSpeed = 5
@@ -168,6 +219,10 @@ class Skeleton(Enemy):
     
     # Animating Enemy
     def animate(self) -> None:
+        """
+        Overiding method to animate skeleton sprite
+        """
+        
         if self.imageIndex + 1 > 4:
             self.imageIndex = 1
         

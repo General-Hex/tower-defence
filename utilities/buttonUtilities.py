@@ -1,14 +1,28 @@
-import pygame
-from buttons import Button
-from world import World
-from turrets import Cannon, Machinelaser
-from constants import *
+"""
+Utilities for setting up and checking button objects
+"""
 
 if __name__ == '__main__':
     print("Error incorrect file run please run __main__.py")
     quit()
 
+try:
+    from world import World
+    from turrets import Cannon, Machinelaser
+    from constants import *
+except ModuleNotFoundError as err:
+    print(err)
+    print("Error missing module please ensure all this games modules are present in their original directory")
+    quit()
+
+
+
 def buttonSetup(doubleSpeed:bool, levelStarted:bool, placingTurrets:bool, world:World, demoCannon:Cannon, demoMachinelaser:Machinelaser, turretType:str|None, selectedTurret:Cannon|Machinelaser|None) -> bool:
+    """
+    Function to draw the main button objects on the main game screen
+    """
+
+    # Updating 2x Speed Button
     if doubleSpeed:
         speedButton.MouseCheck(SCREEN, newText="1x Speed")
     else:
@@ -50,6 +64,10 @@ def buttonSetup(doubleSpeed:bool, levelStarted:bool, placingTurrets:bool, world:
     return placingTurrets
 
 def checkButtons(world:World, cursorTurret:Cannon|Machinelaser|None, selectedTurret:Cannon|Machinelaser|None, placingTurrets:bool, levelStarted:bool, doubleSpeed:bool, turretType:str|None) -> list:
+    """
+    Function to check if main game button objects have been clicked and respond accordingly
+    """
+    
     # Checking Buttons
     if cancelButton.MouseClick():
         placingTurrets = False

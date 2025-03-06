@@ -1,3 +1,7 @@
+"""
+Module to handle turret classes and turret related functions
+"""
+
 # IMPORTING MODULES
 try: 
     import pygame
@@ -36,8 +40,15 @@ if __name__ == '__main__':
     quit()
 
 class Turret(pygame.sprite.Sprite):
+    """
+    Main turret base class
+    """
 
     def __init__(self, tileX:int, tileY:int) -> None:
+        """
+        Turret constructor
+        """
+
         pygame.sprite.Sprite.__init__(self)
         # TURRET ATRIBUTES 
 
@@ -75,6 +86,10 @@ class Turret(pygame.sprite.Sprite):
         self.rect = None
         
     def setupRange(self) -> None:
+        """
+        Method to setup turret's range display circle
+        """
+
         # Turret Range Circle
         self.__rangeImage = pygame.Surface((self.range * 2, self.range * 2 ))
         self.__rangeImage.fill((0, 0, 0))
@@ -85,6 +100,10 @@ class Turret(pygame.sprite.Sprite):
 
     # Updating Turret
     def update(self, allEnemiesGroup:pygame.sprite.Group, doubleSpeed:bool) -> None:
+        """
+        Overiding method to update turret animation and fire turret
+        """
+
         if self.target:
             self.__updateAnimation()
         
@@ -101,6 +120,10 @@ class Turret(pygame.sprite.Sprite):
 
     # Selecting Target
     def __selectTarget(self, allEnemiesGroup:pygame.sprite.Group) -> None:
+        """
+        Method to select enemy as turret's target
+        """
+        
         xDistance = 0
         yDistance = 0
 
@@ -119,6 +142,10 @@ class Turret(pygame.sprite.Sprite):
     
     # Loading Turret Images from Sprite Sheet
     def loadImages(self, spriteSheet:pygame.surface.Surface) -> list:
+        """
+        Method to separate sprite animatin images from spritesheet
+        """
+
         spriteSheet.set_colorkey(RLEACCEL) 
         size = spriteSheet.get_height()
         animationImages = [] 
@@ -131,6 +158,10 @@ class Turret(pygame.sprite.Sprite):
 
     # Updating Turret Animation
     def __updateAnimation(self) -> None:
+        """
+        Method to update turret's shooting animation
+        """
+        
         self.originalImage = self.animationImages[self.imageIndex]
 
         if pygame.time.get_ticks() - self.__updateTime >= ANIMATION_DELAY:
@@ -145,6 +176,10 @@ class Turret(pygame.sprite.Sprite):
     
     # Upgrading Turret
     def upgrade(self) -> None:
+        """
+        Method to upgrade turret's tier
+        """
+
         self.tier += 1 
         self.range = self.data[self.tier-1].get("range")
         self.cooldown = self.data[self.tier-1].get("cooldown")
@@ -162,6 +197,10 @@ class Turret(pygame.sprite.Sprite):
         
     # Drawing Turret
     def draw(self, surface:pygame.surface.Surface) -> None:
+        """
+        Overiding method to draw turret and range circle (if selected) on main game screen
+        """
+
         self.image = pygame.transform.rotate(self.originalImage, self.rotationAngle - 90)
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
@@ -171,7 +210,15 @@ class Turret(pygame.sprite.Sprite):
         surface.blit(self.image, self.rect)
          
 class Cannon(Turret):
+    """
+    Cannon turret subclass
+    """
+
     def __init__(self, tileX:int, tileY:int) -> None:
+        """
+        Cannon constructor
+        """
+
         super().__init__(tileX, tileY)
 
         self.data = [
@@ -206,7 +253,15 @@ class Cannon(Turret):
         
 
 class Machinelaser(Turret):
+    """
+    Machinelaser turret subclass
+    """
+
     def __init__(self, tileX:int, tileY:int) -> None:
+        """
+        Machinelaser constructor
+        """
+
         super().__init__(tileX, tileY)
 
         self.data = [
@@ -244,6 +299,10 @@ class Machinelaser(Turret):
 
 # Creating New Turret
 def createTurret(mousePosition:tuple[int,int], allTurretsGroup:pygame.sprite.Group, world:World, turretType:str) -> pygame.sprite.Group:
+    """
+    Function to place a new turret on the game map
+    """
+
     tileX = mousePosition[0] // TILE_SIZE
     tileY = mousePosition[1] // TILE_SIZE
     mouseTileNum = tileY * TILE_ROWS + tileX 
@@ -267,6 +326,10 @@ def createTurret(mousePosition:tuple[int,int], allTurretsGroup:pygame.sprite.Gro
 
 # Selecting Existing Turret
 def selectTurret(mousePosition:tuple[int,int], allTurretsGroup:pygame.sprite.Group) -> Turret|None:
+    """
+    Function to handle selecting place turrets by clicking on them
+    """
+
     tileX = mousePosition[0] // TILE_SIZE
     tileY = mousePosition[1] // TILE_SIZE
 
@@ -276,5 +339,9 @@ def selectTurret(mousePosition:tuple[int,int], allTurretsGroup:pygame.sprite.Gro
 
 # Clearing Selected Turret
 def clearSelection(allTurretsGroup:pygame.sprite.Group) -> None:
+    """
+    Function to clear previously selected turret
+    """
+
     for turret in allTurretsGroup:
         turret.selected = False  

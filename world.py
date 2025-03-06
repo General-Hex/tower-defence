@@ -1,12 +1,10 @@
+"""
+Module to handle the world class
+"""
+
 # IMPORTING MODULES
 import json
-
-try: 
-    import pygame
-except ModuleNotFoundError as err:
-    print(err)
-    print("pygame does not seem to be installed, please install it using: pip install pygame")
-    quit()
+import random
 
 try:
     from otherFunctions import Try_Load
@@ -21,7 +19,6 @@ except ModuleNotFoundError as err:
     print(err)
     print("Error missing constants module please ensure all this games modules are present in their original directory")
     quit()
-import random
 
 # Ensure Correct File Run
 if __name__ == '__main__':
@@ -30,7 +27,15 @@ if __name__ == '__main__':
 
 # WORLD CLASS
 class World():
+    """
+    World class to control game events and information such as the map and enemy spawn data
+    """
+
     def __init__(self) -> None:
+        """
+        Constructor for world class
+        """
+
         # WORLD ATTRIBUTES
         self.wave = 1 
         self.health = BASE_HEALTH
@@ -49,6 +54,10 @@ class World():
 
     # Prossesing Data From .json File
     def processData(self) -> None:
+        """
+        Method to process raw data from .json file
+        """
+
         for layer in self.__worldData["layers"]:
             if layer["name"] == "tilemap":
                  self.tilemap = layer["data"]
@@ -60,6 +69,10 @@ class World():
     
     # Processing Waypoints from Data
     def __processWaypoints(self, data:dict) -> None:
+        """
+        Method to extract and process waypoints from data
+        """
+
         for point in data:
             x_coordinant = point.get("x")
             y_coordinant = point.get("y") + 70
@@ -67,6 +80,10 @@ class World():
 
     # Processing Enemy Spawning
     def processEnemies(self) -> None:
+        """
+        Method to handle the spawning of enemies in waves
+        """
+
         if self.wave < WAVE_COUNT + 1:
             enemies = ENEMY_COUNT[self.wave -1]
 
@@ -79,10 +96,18 @@ class World():
 
     # Checking Wave Compleation
     def checkWaveFinished(self) -> bool:
+        """
+        Method to check if the current enemy wave has finished
+        """
+
         return self.killedEnemies + self.missedEnemies == len(self.enemyList)
     
     # Preparing for New Wave
     def prepareNewWave(self) -> None:
+        """
+        Method to prepare the next enemy wave
+        """
+
         self.enemyList = []
         self.spawnedEnemies = 0
         self.killedEnemies = 0
@@ -91,6 +116,10 @@ class World():
 
     # Draw World
     def draw(self) -> None:
+        """
+        Method to draw map on main game screen
+        """
+        
         SCREEN.blit(self.__image, (0, 0))
 
     

@@ -1,3 +1,7 @@
+"""
+Button module to handle the button class
+"""
+
 # IMPORTING MODULES
 try: 
     import pygame
@@ -13,7 +17,15 @@ if __name__ == '__main__':
 
 # BUTTON CLASS
 class Button(pygame.sprite.Sprite):
+    """
+    Main button class for easy creation of functional buttons in the main game
+    """
+
     def __init__(self, font:pygame.font.Font, text:str, textColour:tuple[int, int, int], onColour:tuple[int, int, int], offColour:tuple[int, int], x:int, y:int, width:int, height:int, square:bool, singleClick:bool) -> None:
+        """
+        Constructor for button class
+        """
+    
         pygame.sprite.Sprite.__init__(self)
         # BUTTON ATTRIBUTES
         self.__x = x 
@@ -42,6 +54,10 @@ class Button(pygame.sprite.Sprite):
 
     # Check If Mouse On Button
     def MouseCheck(self, SCREEN, disabled:bool=False, diabledColour:tuple[int, int, int]=None, newText:str=None) -> None:
+        """
+        Method to draw button on game screen and react to mouse hovering
+        """
+
         self.active = True
         if newText:
             self.__text = self.__font.render(str(newText), self.__textColour, self.__textColour)
@@ -73,6 +89,10 @@ class Button(pygame.sprite.Sprite):
             
     # Check If Button Is Clicked
     def MouseClick(self) -> bool:
+        """
+        Method to check if button has been clicked
+        """
+
         if not pygame.mouse.get_pressed()[0]:
             self.__clicked = False
         

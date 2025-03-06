@@ -1,3 +1,7 @@
+"""
+Secondary module used for unit testing
+"""
+
 import pytest
 
 def square(a):

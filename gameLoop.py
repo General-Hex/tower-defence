@@ -1,6 +1,13 @@
+"""
+Module which handles main game loop including event handling
+"""
+
+if __name__ == '__main__':
+    print("Error incorrect file run please run __main__.py")
+    quit()
+
 try: 
     import pygame
-
 except ModuleNotFoundError as err:
     print(err)
     print("pygame does not seem to be installed, please install it using: pip install pygame")
@@ -50,6 +57,10 @@ from utilities.buttonUtilities import checkButtons, buttonSetup
 from utilities.mainUtilities import displayGameTexts
 
 def mainGameLoop(clock:pygame.time.Clock):
+    """
+    Main game loop function which initialises the game instance and handles events
+    """
+
     # Game World Setup
     world = World()
     world.processData()

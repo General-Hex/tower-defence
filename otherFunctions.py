@@ -1,3 +1,7 @@
+"""
+Module to handle generic functions such as loading sounds/images with error exception and adding text to game
+"""
+
 # IMPORTING MODULES
 try: 
     import pygame
@@ -18,6 +22,10 @@ if __name__ == '__main__':
 
 # Loading Images/Music with Error Exception if File is Not Found
 def Try_Load(file:str, type:str) -> pygame.surface.Surface|pygame.mixer.Sound|None:
+    """
+    Function which imports images/music/sound with error exception
+    """
+    
     # Loading Image
     if type.lower() == 'image':
         try: 
@@ -48,11 +56,19 @@ def Try_Load(file:str, type:str) -> pygame.surface.Surface|pygame.mixer.Sound|No
 
 # Adding Text to Display
 def addText(text:str, font:pygame.font.Font, colour:tuple[int, int, int], x:int, y:int):
+    """
+    Function to add text to main game screen
+    """
+
     text_image = font.render(text, True, colour)
     SCREEN.blit(text_image, (x, y))
 
 # Checking Spawn Cooldown Based on 2x Speed
 def checkCooldown(doubleSpeed:bool, lastEnemySpawn:int, levelStarted:bool) -> bool:
+    """
+    Function to check if the cooldown time for enemy spawning has passed
+    """
+    
     if doubleSpeed:
         return pygame.time.get_ticks() - lastEnemySpawn >= SPAWN_COOLDOWN//2 and levelStarted
     else:

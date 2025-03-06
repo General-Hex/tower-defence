@@ -10,6 +10,8 @@ Futher info: README.md
 
 try: 
     import pygame
+    pygame.init()
+    pygame.mixer.init()
 except ModuleNotFoundError as err:
     print(err)
     print("pygame does not seem to be installed, please install it using: pip install pygame")
@@ -25,6 +27,4 @@ except ModuleNotFoundError as err:
 if __name__ == '__main__':  
     # Pygames Setups
     clock = pygame.time.Clock()
-    pygame.init()
-    pygame.mixer.init()
     mainGameLoop(clock)

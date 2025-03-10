@@ -18,7 +18,7 @@ except ModuleNotFoundError as err:
     quit()
 
 try:
-    from gameLoop import mainGameLoop
+    from utilities.gameStateManager import GameStateManager
 except ModuleNotFoundError as err:
     print(err)
     print("Error missing module please ensure all this games modules are present in their original directory")
@@ -27,4 +27,6 @@ except ModuleNotFoundError as err:
 if __name__ == '__main__':  
     # Pygames Setups
     clock = pygame.time.Clock()
-    mainGameLoop(clock)
+    gameStateManager = GameStateManager(clock)
+
+    gameStateManager.runMainGame()

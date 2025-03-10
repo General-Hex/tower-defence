@@ -15,7 +15,7 @@ except ModuleNotFoundError as err:
     quit()
 
 try:
-    from buttons import Button
+    from models.buttons import Button
 except ModuleNotFoundError as err:
     print(err)
     print("Error missing buttons module please ensure all this games modules are present in their original directory")

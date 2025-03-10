@@ -9,8 +9,8 @@ if __name__ == '__main__':
 try:
     from constants import *
     from otherFunctions import addText
-    from world import World
-    from turrets import Machinelaser, Cannon
+    from models.world import World
+    from models.turrets import Machinelaser, Cannon
 except ModuleNotFoundError as err:
     print(err)
     print("Error missing module please ensure all this games modules are present in their original directory")

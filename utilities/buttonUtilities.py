@@ -7,8 +7,8 @@ if __name__ == '__main__':
     quit()
 
 try:
-    from world import World
-    from turrets import Cannon, Machinelaser
+    from models.world import World
+    from models.turrets import Cannon, Machinelaser
     from constants import *
 except ModuleNotFoundError as err:
     print(err)

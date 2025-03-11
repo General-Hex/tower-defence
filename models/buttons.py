@@ -37,6 +37,7 @@ class Button(pygame.sprite.Sprite):
         self.__clicked = False
         self.__singleClick = singleClick
         self.__textColour = textColour
+        self.__rawText = text
         self.active = False
         
         if self.__squareCheck:
@@ -53,7 +54,7 @@ class Button(pygame.sprite.Sprite):
             self.__square = None
 
     # Check If Mouse On Button
-    def MouseCheck(self, SCREEN, disabled:bool=False, diabledColour:tuple[int, int, int]=None, newText:str=None) -> None:
+    def MouseCheck(self, SCREEN, disabled:bool=False, disabledColour:tuple[int, int, int]=None, newText:str=None) -> None:
         """
         Method to draw button on game screen and react to mouse hovering
         """
@@ -73,11 +74,11 @@ class Button(pygame.sprite.Sprite):
         
         elif disabled:
             if self.__squareCheck:
-                pygame.draw.rect(SCREEN, diabledColour, self.__square)
+                pygame.draw.rect(SCREEN, disabledColour, self.__square)
                 SCREEN.blit(self.__text, self.__textRect)
             
             else:
-                SCREEN.blit(self.__textOn, self.__textRect)
+                SCREEN.blit(self.__font.render(self.__rawText, disabledColour, disabledColour), self.__textRect)
 
         else:
             if self.__squareCheck:

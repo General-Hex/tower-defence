@@ -50,6 +50,13 @@ except ModuleNotFoundError as err:
     print("Error missing constants module please ensure all this games modules are present in their original directory")
     quit()
 
+try:
+    from models.buttons import Button
+except ModuleNotFoundError as err:
+    print(err)
+    print("Error missing buttons module please ensure all this games modules are present in their original directory")
+    quit()
+
 from utilities.buttonUtilities import checkButtons, buttonSetup
 from utilities.mainUtilities import displayGameTexts
 
@@ -89,26 +96,64 @@ class MainMenu(GameState):
     Main menu subclass to handle game's main menu
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Main menu constructor
         """
-
         super().__init__()
-    
-    def enter(self):
+
+    def enter(self, clock) -> None:
         """
         Overide method for main menu to initilise itself in the current game
         """
 
-        pass
+        logoImage = Try_Load('main_logo.png', 'image')
+        logo = pygame.transform.scale_by(logoImage, 1.5)
+        logoRect = logo.get_rect(center=(SCREEN_HEIGHT//2, SCREEN_WIDTH//2))
+        levelsButton = Button(FONT2, 'Levels', (255, 255, 255), (6, 221, 7), (4, 149, 41), SCREEN_WIDTH//2, 150, 275, 50, False, True)
+        loginButton = Button(FONT2, 'Login', (255, 255, 255), (6, 221, 7), (4, 149, 41), SCREEN_WIDTH//2, 250, 275, 50, False, True)
+        quitButton = Button(FONT2, 'Quit', (255, 255, 255), (255, 0, 0), (139, 0, 0), SCREEN_WIDTH//2, 332, 275, 50, False, True)
+        self.active = True
+        self.__nextScreen = None
 
-    def exit(self):
+        pygame.display.set_caption("Tower Defence Mayhem")
+        pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+        Try_Load('main_theme.mp3', 'music')
+        pygame.mixer.music.set_volume(0.6)
+        pygame.mixer.music.play(loops=-1)
+
+        while self.active:
+            clock.tick(FPS)
+            SCREEN.blit(logo, logoRect)
+            levelsButton.MouseCheck(SCREEN)
+            loginButton.MouseCheck(SCREEN, True, (160, 160, 160))
+            quitButton.MouseCheck(SCREEN)
+
+            # Event Handling
+            for event in pygame.event.get():
+                # Exiting Game
+                if event.type == pygame.QUIT or event.type == KEYDOWN and event.key == K_ESCAPE:
+                    pygame.quit()
+                    quit()
+            
+            if levelsButton.MouseClick():
+                self.__nextScreen = 'levels'
+                self.active = False
+                return self.exit()
+
+            if quitButton.MouseClick():
+                pygame.quit()
+                quit()
+
+            pygame.display.flip()
+
+
+    def exit(self) -> str:
         """
         Overide method for main menu to remove itself from the current game
         """
 
-        pass
+        return self.__nextScreen
 
 
 class MainGame(GameState):
@@ -116,14 +161,15 @@ class MainGame(GameState):
     Main game subclass to handle running the game's actual game 
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Main game constructor
         """
 
         super().__init__()
+        self.__nextScreen = None
     
-    def enter(self, clock):
+    def enter(self, clock) -> None:
         """
         Overide method for main game to initilise itself in the current game
         """
@@ -151,12 +197,12 @@ class MainGame(GameState):
         turretType = None
         cursorTurret = None
 
-        # MAIN GAME LOOP
-        pygame.display.set_caption("Tower Defence Mayhem")
-        Try_Load('main_theme.mp3', 'music')
-        pygame.mixer.music.set_volume(0.6)
-        pygame.mixer.music.play(loops=-1)
+        restartButton = Button(FONT3, "Restart", (255, 255, 255), (255, 68, 51), (255, 95, 31), SCREEN_WIDTH//2 + 80, SCREEN_HEIGHT//2 - 50, 250, 30, True, True)
+        mainMenuButton = Button(FONT3, "Main Menu", (255, 255, 255), (255, 68, 51), (255, 95, 31), SCREEN_WIDTH//2 + 80, SCREEN_HEIGHT//2, 250, 30, True, True)
 
+        pygame.display.set_mode((SCREEN_WIDTH + SIDE_PANNEL, SCREEN_HEIGHT))
+
+        # MAIN GAME LOOP
         while "POTATO":
             # Setting FPS
             clock.tick(FPS)
@@ -241,6 +287,7 @@ class MainGame(GameState):
             else:
                 pygame.draw.rect(SCREEN, (0, 0, 0), (200, 200, 500, 200), border_radius=30)
                 restartButton.MouseCheck(SCREEN)
+                mainMenuButton.MouseCheck(SCREEN)
                 # Game Loss
                 if gameOutcome == -1:
                     addText("GAME OVER", FONT, (255, 0, 0), SCREEN_WIDTH//2-130, SCREEN_HEIGHT//2-130)    
@@ -261,6 +308,10 @@ class MainGame(GameState):
                     world.processEnemies()
                     allEnemies.empty()
                     allTurrets.empty()
+                
+                if mainMenuButton.MouseClick():
+                    self.__nextScreen = 'main menu'
+                    return self.exit()
             
             # Event Handling
             for event in pygame.event.get():
@@ -286,10 +337,10 @@ class MainGame(GameState):
             # Updating Display
             pygame.display.flip()
 
-    def exit(self):
+    def exit(self) -> str:
         """
         Overide method for main game to remove itself from the current game
         """
 
-        pass
+        return self.__nextScreen
     

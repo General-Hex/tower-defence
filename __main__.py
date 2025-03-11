@@ -29,4 +29,4 @@ if __name__ == '__main__':
     clock = pygame.time.Clock()
     gameStateManager = GameStateManager(clock)
 
-    gameStateManager.runMainGame()
+    gameStateManager.runGame()

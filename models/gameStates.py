@@ -110,9 +110,9 @@ class MainMenu(GameState):
         logoImage = Try_Load('main_logo.png', 'image')
         logo = pygame.transform.scale_by(logoImage, 1.5)
         logoRect = logo.get_rect(center=(SCREEN_HEIGHT//2, SCREEN_WIDTH//2))
-        levelsButton = Button(FONT2, 'Levels', (255, 255, 255), (6, 221, 7), (4, 149, 41), SCREEN_WIDTH//2, 150, 275, 50, False, True)
-        loginButton = Button(FONT2, 'Login', (255, 255, 255), (6, 221, 7), (4, 149, 41), SCREEN_WIDTH//2, 250, 275, 50, False, True)
-        quitButton = Button(FONT2, 'Quit', (255, 255, 255), (255, 0, 0), (139, 0, 0), SCREEN_WIDTH//2, 332, 275, 50, False, True)
+        levelsButton = Button(FONT2, 'Levels', (255, 255, 255), (6, 221, 7), (4, 149, 41), SCREEN_WIDTH//2, 100, 275, 50, False, True, Try_Load('levels_button_on.png', 'image'), Try_Load('levels_button_off.png', 'image'), 1.7)
+        loginButton = Button(FONT2, 'Login', (255, 255, 255), (6, 221, 7), (4, 149, 41), SCREEN_WIDTH//2, 225, 275, 50, False, True, Try_Load('login_button_on.png', 'image'), Try_Load('login_button_off.png', 'image'), 1.8)
+        quitButton = Button(FONT2, 'Quit', (255, 255, 255), (255, 0, 0), (139, 0, 0), SCREEN_WIDTH//2, 332, 275, 50, False, True, Try_Load('quit_button_on.png', 'image'), Try_Load('quit_button_off.png', 'image'), 2)
         self.active = True
         self.__nextScreen = None
 

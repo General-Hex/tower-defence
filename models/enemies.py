@@ -137,11 +137,7 @@ class Enemy(pygame.sprite.Sprite):
         """
         Method to check if enemy is still alive
         """
-
-        if self.health <= 0:
-            world.money += self.worth
-            world.killedEnemies += 1
-            self.kill()
+        pass
 
 
 class Zombie(Enemy):
@@ -155,10 +151,7 @@ class Zombie(Enemy):
         """
 
         super().__init__(movementWaypoints)
-        self.health = 20
         self.movementSpeed = 1
-        self.worth = 10
-        self.damage = 10
         self.originalImage = Try_Load("Zombie Assets/zombie 1.png", 'image')
     
     # Animating Enemy
@@ -188,10 +181,7 @@ class Skeleton(Enemy):
         """
 
         super().__init__(movementWaypoints)
-        self.health = 5
         self.movementSpeed = 5
-        self.worth = 5
-        self.damage = 5
         self.originalImage = Try_Load("Skeleton Assets/skeleton 1.png", 'image')
     
     # Animating Enemy

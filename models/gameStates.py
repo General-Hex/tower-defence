@@ -292,7 +292,7 @@ class MainGame(GameState):
                             
 
                         else:
-                            selectedTurret = selectTurret(mousePos, allTurrets)
+                            selectedTurret = None
 
             
             # Updating Display

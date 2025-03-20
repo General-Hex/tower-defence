@@ -3,35 +3,11 @@ Module to handle turret classes and turret related functions
 """
 
 # IMPORTING MODULES
-try: 
-    import pygame
-except ModuleNotFoundError as err:
-    print(err)
-    print("pygame does not seem to be installed, please install it using: pip install pygame")
-    quit()
+import pygame
 from pygame.locals import RLEACCEL
-
-try:
-    from otherFunctions import Try_Load
-except ModuleNotFoundError as err:
-    print(err)
-    print("Error missing otherFunctions module please ensure all this games modules are present in their original directory")
-    quit()
-
-try:
-    from constants import *
-except ModuleNotFoundError as err:
-    print(err)
-    print("Error missing constants module please ensure all this games modules are present in their original directory")
-    quit()
-
-try:
-    from models.world import World
-except ModuleNotFoundError as err:
-    print(err)
-    print("Error missing world TURRETS module please ensure all this games modules are present in their original directory")
-    quit()
-
+from otherFunctions import Try_Load
+from constants import *
+from models.world import World
 import math
 
 # Ensure Correct File Run

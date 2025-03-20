@@ -5,20 +5,8 @@ Module to handle the world class
 # IMPORTING MODULES
 import json
 import random
-
-try:
-    from otherFunctions import Try_Load
-except ModuleNotFoundError as err:
-    print(err)
-    print("Error missing otherFunctions module please ensure all this games modules are present in their original directory")
-    quit()
-
-try:
-    from constants import *
-except ModuleNotFoundError as err:
-    print(err)
-    print("Error missing constants module please ensure all this games modules are present in their original directory")
-    quit()
+from otherFunctions import Try_Load
+from constants import *
 
 # Ensure Correct File Run
 if __name__ == '__main__':

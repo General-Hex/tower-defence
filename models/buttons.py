@@ -3,13 +3,10 @@ Button module to handle the button class
 """
 
 # IMPORTING MODULES
-try: 
-    import pygame
-    from pygame import RLEACCEL
-except ModuleNotFoundError as err:
-    print(err)
-    print("pygame does not seem to be installed, please install it using: pip install pygame")
-    quit()
+
+import pygame
+from pygame import RLEACCEL
+
 
 # Ensure Correct File Run
 if __name__ == '__main__':

@@ -6,15 +6,9 @@ if __name__ == '__main__':
     print("Error incorrect file run please run __main__.py")
     quit()
 
-try:
-    from models.world import World
-    from models.turrets import Cannon, Machinelaser
-    from constants import *
-except ModuleNotFoundError as err:
-    print(err)
-    print("Error missing module please ensure all this games modules are present in their original directory")
-    quit()
-
+from models.world import World
+from models.turrets import Cannon, Machinelaser
+from constants import *
 
 
 def buttonSetup(doubleSpeed:bool, levelStarted:bool, placingTurrets:bool, world:World, demoCannon:Cannon, demoMachinelaser:Machinelaser, turretType:str|None, selectedTurret:Cannon|Machinelaser|None) -> bool:

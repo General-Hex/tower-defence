@@ -3,35 +3,12 @@ Module to handle the enemy classes
 """
 
 # IMPORTING MODULES
-try: 
-    import pygame
-except ModuleNotFoundError as err:
-    print(err)
-    print("pygame does not seem to be installed, please install it using: pip install pygame")
-    quit()
+import pygame
 from pygame.locals import RLEACCEL
 from pygame.math import Vector2
-
-try:
-    from constants import *
-except ModuleNotFoundError as err:
-    print(err)
-    print("Error missing constants module please ensure all this games modules are present in their original directory")
-    quit()
-
-try:
-    from otherFunctions import Try_Load
-except ModuleNotFoundError as err:
-    print(err)
-    print("Error missing otherFunctions module please ensure all this games modules are present in their original directory")
-    quit()
-
-try:
-    from models.world import World
-except ModuleNotFoundError as err:
-    print(err)
-    print("Error missing world module please ensure all this games modules are present in their original directory")
-    quit()
+from constants import *
+from otherFunctions import Try_Load
+from models.world import World
 
 import math
 

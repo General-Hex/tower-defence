@@ -79,13 +79,6 @@ class Turret(pygame.sprite.Sprite):
         """
         Overiding method to update turret animation and fire turret
         """
-
-        if self.target:
-            self.__updateAnimation()
-        
-        else:
-            if pygame.time.get_ticks() - self.__lastShot > self.cooldown:
-                self.__selectTarget(allEnemiesGroup)
         
         if doubleSpeed and not self.__doubleSpeed:
             self.cooldown = self.cooldown//2
@@ -99,22 +92,7 @@ class Turret(pygame.sprite.Sprite):
         """
         Method to select enemy as turret's target
         """
-        
-        xDistance = 0
-        yDistance = 0
-
-        # Selecting Living Target in Range
-        for enemy in allEnemiesGroup:
-            if enemy.health > 0:       
-                xDistance = enemy.pos[0] - self.x
-                yDistance = enemy.pos[1] - self.y
-                totalDistance = math.sqrt(xDistance**2 + yDistance**2)
-                if totalDistance < self.range:
-                    self.target = enemy 
-                    self.rotationAngle = math.degrees(math.atan2(-yDistance, xDistance))
-                    self.target.health -= self.damage
-                    self.sfx.play()
-                    break  
+        pass
     
     # Loading Turret Images from Sprite Sheet
     def loadImages(self, spriteSheet:pygame.surface.Surface) -> list:
@@ -137,39 +115,14 @@ class Turret(pygame.sprite.Sprite):
         """
         Method to update turret's shooting animation
         """
-        
-        self.originalImage = self.animationImages[self.imageIndex]
-
-        if pygame.time.get_ticks() - self.__updateTime >= ANIMATION_DELAY:
-            self.__updateTime = pygame.time.get_ticks()
-            if self.imageIndex < TURRET_ANIMATION_FRAMES - 1:
-                self.imageIndex += 1
-            
-            else:
-                self.imageIndex = 0
-                self.__lastShot = pygame.time.get_ticks()
-                self.target = None
+        pass
     
     # Upgrading Turret
     def upgrade(self) -> None:
         """
         Method to upgrade turret's tier
         """
-
-        self.tier += 1 
-        self.range = self.data[self.tier-1].get("range")
-        self.cooldown = self.data[self.tier-1].get("cooldown")
-        self.damage = self.data[self.tier-1].get("damage")
-        self.cooldown = self.data[self.tier-1].get("cooldown") 
-        self.animationImages = self.loadImages(self.allTurretSheets[self.tier - 1])
-        self.originalImage = self.animationImages[self.imageIndex]
-        self.__rangeImage = pygame.Surface((self.range * 2, self.range * 2 ))
-        self.__rangeImage.fill((0, 0, 0))
-        self.__rangeImage.set_colorkey((0, 0, 0))
-        pygame.draw.circle(self.__rangeImage, (220, 220, 220), (self.range, self.range), self.range)
-        self.__rangeImage.set_alpha(100)
-        self.__rangeRect = self.__rangeImage.get_rect(center=self.rect.center) 
-        self.__upgradesfx.play()
+        pass
         
     # Drawing Turret
     def draw(self, surface:pygame.surface.Surface) -> None:

@@ -8,20 +8,13 @@ Futher info: README.md
 
 # IMPORTING MODULES
 
-try: 
-    import pygame
-    pygame.init()
-    pygame.mixer.init()
-except ModuleNotFoundError as err:
-    print(err)
-    print("pygame does not seem to be installed, please install it using: pip install pygame")
-    quit()
 
-try:
-    from utilities.gameStateManager import GameStateManager
-except ModuleNotFoundError as err:
-    print(err)
-    print("Error missing module please ensure all this games modules are present in their original directory")
+import pygame
+pygame.init()
+pygame.mixer.init()
+
+
+from utilities.gameStateManager import GameStateManager
 
 # Main Game
 if __name__ == '__main__':  

@@ -3,12 +3,8 @@ Module to handle generic functions such as loading sounds/images with error exce
 """
 
 # IMPORTING MODULES
-try: 
-    import pygame
-except ModuleNotFoundError as err:
-    print(err)
-    print("pygame does not seem to be installed, please install it using: pip install pygame")
-    quit()
+
+import pygame
 
 from constants import SCREEN, SPAWN_COOLDOWN
 import os

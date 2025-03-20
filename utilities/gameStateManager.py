@@ -7,12 +7,6 @@ class GameStateManager():
         self.__MainMenuState = MainMenu()
         self.__clock = clock
 
-    # def runMainMenu(self):
-    #     self.__MainMenuState.enter(self.__clock)
-
-    # def runMainGame(self):
-    #     self.__MainGameState.enter(self.__clock)
-
     def runGame(self):
         self.__screen = 'main menu'
         while "POTATO":

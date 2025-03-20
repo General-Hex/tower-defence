@@ -88,7 +88,7 @@ ENEMY_COUNT = [
     },
 
 ]
-WAVE_COUNT = 1#len(ENEMY_COUNT)
+WAVE_COUNT = len(ENEMY_COUNT)
 
 # Game Fonts
 FONT = pygame.font.SysFont('Consolas', 80, bold=True)

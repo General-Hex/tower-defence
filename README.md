@@ -56,7 +56,7 @@ Button frames: https://www.vectorstock.com/
 
 Please note that the _LOGIN_ button does not work and is only there as a placeholder for the time being
 
-I do not claim ownership of any of the images or audios attached to this game. Many of them are AI generated or taking from the internet in [Credits](#credits).
+I do not claim ownership of any of the images or audios attached to this game. Many of them are AI generated or taking from the internet as referanced in [Credits](#credits).
 
 Tower Defence Mayhem is protected by copywrite laws and any infrindgement will face consequences.
 

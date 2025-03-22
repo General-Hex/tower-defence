@@ -258,13 +258,7 @@ def selectTurret(mousePosition:tuple[int,int], allTurretsGroup:pygame.sprite.Gro
     """
     Function to handle selecting place turrets by clicking on them
     """
-
-    tileX = mousePosition[0] // TILE_SIZE
-    tileY = mousePosition[1] // TILE_SIZE
-
-    for turret in allTurretsGroup:
-        if (tileX, tileY) == (turret.tileX, turret.tileY):
-            return turret  
+    pass
 
 # Clearing Selected Turret
 def clearSelection(allTurretsGroup:pygame.sprite.Group) -> None:
@@ -272,5 +266,4 @@ def clearSelection(allTurretsGroup:pygame.sprite.Group) -> None:
     Function to clear previously selected turret
     """
 
-    for turret in allTurretsGroup:
-        turret.selected = False  
+    pass

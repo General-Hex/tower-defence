@@ -13,7 +13,9 @@ except ModuleNotFoundError as err:
 from pygame.sprite import Group
 from pygame.locals import(
     K_ESCAPE, 
-    KEYDOWN)
+    KEYDOWN,
+    K_p,
+    RLEACCEL)
 
 try:
     from models.enemies import Zombie, Skeleton
@@ -199,11 +201,31 @@ class MainGame(GameState):
 
         restartButton = Button(FONT3, "Restart", (255, 255, 255), (255, 68, 51), (255, 95, 31), SCREEN_WIDTH//2 + 80, SCREEN_HEIGHT//2 - 50, 250, 30, True, True)
         mainMenuButton = Button(FONT3, "Main Menu", (255, 255, 255), (255, 68, 51), (255, 95, 31), SCREEN_WIDTH//2 + 80, SCREEN_HEIGHT//2, 250, 30, True, True)
+        
+        pauseImage = Try_Load('pause_button.png', 'image')
+        pauseRect = pauseImage.get_rect(center=(SCREEN_HEIGHT//2, SCREEN_WIDTH//2))
+        pauseImage.set_colorkey((0, 0, 0), RLEACCEL)
 
+        paused = False
         pygame.display.set_mode((SCREEN_WIDTH + SIDE_PANNEL, SCREEN_HEIGHT))
 
         # MAIN GAME LOOP
         while "POTATO":
+
+            if paused:
+                for event in pygame.event.get():
+                    # Exiting Game
+                    if event.type == pygame.QUIT or event.type == KEYDOWN and event.key == K_ESCAPE:
+                        pygame.quit()
+                        quit()
+                    
+                    if event.type == pygame.KEYDOWN and event.key == pygame.K_p:
+                        paused = not paused
+                
+                SCREEN.blit(pauseImage, pauseRect)
+                pygame.display.flip()
+                continue
+
             # Setting FPS
             clock.tick(FPS)
 
@@ -319,6 +341,9 @@ class MainGame(GameState):
                 if event.type == pygame.QUIT or event.type == KEYDOWN and event.key == K_ESCAPE:
                     pygame.quit()
                     quit()
+                
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_p:
+                    paused = not paused
 
                 # Adding/Selecting Turrets
                 if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
@@ -333,7 +358,6 @@ class MainGame(GameState):
                         else:
                             selectedTurret = selectTurret(mousePos, allTurrets)
 
-            
             # Updating Display
             pygame.display.flip()
 

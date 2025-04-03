@@ -63,6 +63,7 @@ from utilities.buttonUtilities import checkButtons, buttonSetup
 from utilities.mainUtilities import displayGameTexts
 
 from abc import ABC, abstractmethod
+import time
 
 class GameState(ABC):
     """
@@ -104,7 +105,7 @@ class MainMenu(GameState):
         """
         super().__init__()
 
-    def enter(self, clock) -> None:
+    def enter(self, clock, setup:bool=False) -> str:
         """
         Overide method for main menu to initilise itself in the current game
         """
@@ -117,12 +118,15 @@ class MainMenu(GameState):
         quitButton = Button(FONT2, 'Quit', (255, 255, 255), (255, 0, 0), (139, 0, 0), SCREEN_WIDTH//2, 332, 275, 50, False, True, Try_Load('quit_button_on.png', 'image'), Try_Load('quit_button_off.png', 'image'), 2)
         self.active = True
         self.__nextScreen = None
+        
 
-        pygame.display.set_caption("Tower Defence Mayhem")
-        pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-        Try_Load('main_theme.mp3', 'music')
-        pygame.mixer.music.set_volume(0.6)
-        pygame.mixer.music.play(loops=-1)
+        
+        if setup or True:
+            pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+            pygame.display.set_caption("Tower Defence Mayhem")
+            Try_Load('main_theme.mp3', 'music')
+            pygame.mixer.music.set_volume(0.6)
+            pygame.mixer.music.play(loops=-1)
 
         while self.active:
             clock.tick(FPS)
@@ -138,12 +142,12 @@ class MainMenu(GameState):
                     pygame.quit()
                     quit()
             
-            if levelsButton.MouseClick():
+            if levelsButton.MouseClick(True):
                 self.__nextScreen = 'levels'
                 self.active = False
                 return self.exit()
 
-            if quitButton.MouseClick():
+            if quitButton.MouseClick(True):
                 pygame.quit()
                 quit()
 
@@ -156,7 +160,6 @@ class MainMenu(GameState):
         """
 
         return self.__nextScreen
-
 
 class MainGame(GameState):
     """
@@ -171,7 +174,7 @@ class MainGame(GameState):
         super().__init__()
         self.__nextScreen = None
     
-    def enter(self, clock) -> None:
+    def enter(self, clock) -> str:
         """
         Overide method for main game to initilise itself in the current game
         """
@@ -209,6 +212,8 @@ class MainGame(GameState):
         paused = False
         pygame.display.set_mode((SCREEN_WIDTH + SIDE_PANNEL, SCREEN_HEIGHT))
 
+        startTime = time.time()
+        finalTime = None
         # MAIN GAME LOOP
         while "POTATO":
 
@@ -307,6 +312,9 @@ class MainGame(GameState):
 
             # GAME OVER
             else:
+                if not finalTime:
+                    finalTime = int(time.time() - startTime)
+                score = 1000 - finalTime
                 pygame.draw.rect(SCREEN, (0, 0, 0), (200, 200, 500, 200), border_radius=30)
                 restartButton.MouseCheck(SCREEN)
                 mainMenuButton.MouseCheck(SCREEN)
@@ -318,8 +326,9 @@ class MainGame(GameState):
                 elif gameOutcome == 1:
                     addText("YOU WIN", FONT, (0, 200, 0), SCREEN_WIDTH//2-100, SCREEN_HEIGHT//2-130)    
 
+                addText("Score: " + str(score), FONT3, (255,255,255), SCREEN_WIDTH//2, SCREEN_HEIGHT//2 - 150)
                 # Restarting Game
-                if restartButton.MouseClick():
+                if restartButton.MouseClick(True):
                     gameOver = False 
                     levelStarted = False
                     placingTurrets = False
@@ -331,7 +340,7 @@ class MainGame(GameState):
                     allEnemies.empty()
                     allTurrets.empty()
                 
-                if mainMenuButton.MouseClick():
+                if mainMenuButton.MouseClick(True):
                     self.__nextScreen = 'main menu'
                     return self.exit()
             
@@ -367,4 +376,61 @@ class MainGame(GameState):
         """
 
         return self.__nextScreen
+
+class LevelsPage(GameState):
+    """
+    Levels Page subclass to handle the levels page of the game
+    """
+    def __init__(self) -> None: 
+        """
+        Levels Page constructor
+        """
+        super().__init__()
+    
+    def enter(self, clock) -> str:
+        """
+        Overide method for levels page to initilise itself in the current game
+        """
+
+        self.active = True
+        levelOneButton = Button(FONT2, 'Level 1', (255, 255, 255), (255, 255, 0), (244, 187, 68), SCREEN_WIDTH//2, 100, 275, 50, False, True, Try_Load('levels_button_on.png', 'image'), Try_Load('levels_button_off.png', 'image'), 1.7)
+        levelTwoButton = Button(FONT2, 'Level 2', (255, 255, 255), (255, 255, 0), (244, 187, 68), SCREEN_WIDTH//2, 225, 275, 50, False, True, Try_Load('levels_button_on.png', 'image'), Try_Load('levels_button_off.png', 'image'), 1.7)
+        backButton = Button(FONT2, 'Back', (255, 255, 255), (255, 0, 0), (240, 0, 0), SCREEN_WIDTH//2, 332, 275, 50, False, True, Try_Load('quit_button_on.png', 'image'), Try_Load('quit_button_off.png', 'image'), 2)
+        logoImage = Try_Load('main_logo.png', 'image')
+        logo = pygame.transform.scale_by(logoImage, 1.5)
+        logoRect = logo.get_rect(center=(SCREEN_HEIGHT//2, SCREEN_WIDTH//2))
+
+
+        while self.active:
+            clock.tick(FPS)
+            SCREEN.blit(logo, logoRect)
+            levelOneButton.MouseCheck(SCREEN)
+            levelTwoButton.MouseCheck(SCREEN)
+            backButton.MouseCheck(SCREEN)
+
+            for event in pygame.event.get():
+                # Exiting Game
+                if event.type == pygame.QUIT or event.type == KEYDOWN and event.key == K_ESCAPE:
+                    pygame.quit()
+                    quit()
+            
+            if backButton.MouseClick(True):
+                self.__nextScreen = 'main menu'
+                self.active = False
+                return self.exit()
+            
+            if levelOneButton.MouseClick(True):
+                self.__nextScreen = 'main game'
+                self.active = False
+                return self.exit()
+            
+            pygame.display.flip()
+
+    
+    def exit(self) -> str:
+        return self.__nextScreen
+        
+
+
+    
     

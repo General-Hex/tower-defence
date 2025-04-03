@@ -11,6 +11,7 @@ except ModuleNotFoundError as err:
     print("pygame does not seem to be installed, please install it using: pip install pygame")
     quit()
 
+import time
 # Ensure Correct File Run
 if __name__ == '__main__':
     print("Error incorrect file run please run __main__.py")
@@ -47,6 +48,8 @@ class Button(pygame.sprite.Sprite):
         if self.__onButtonImage:
             self.__onButtonImage = pygame.transform.scale(self.__onButtonImage, (self.__onButtonImage.get_width()//scaleFactor, self.__onButtonImage.get_height()//scaleFactor))
             self.__onButtonImage.set_colorkey((0, 0, 0), RLEACCEL)
+            self.__width = self.__onButtonImage.get_width()
+            self.__height = self.__onButtonImage.get_height()
 
         if self.__offButtonImage:
             self.__offButtonImage = pygame.transform.scale(self.__offButtonImage, (self.__offButtonImage.get_width()//scaleFactor, self.__offButtonImage.get_height()//scaleFactor))
@@ -78,18 +81,17 @@ class Button(pygame.sprite.Sprite):
 
         if pygame.mouse.get_pos()[0] in range(self.__x-self.__width//2, self.__x+self.__width//2) and pygame.mouse.get_pos()[1] in range(self.__y-self.__height//2, self.__y+self.__height//2) and not disabled:
             if self.__onButtonImage:
-                SCREEN.blit(self.__onButtonImage , (self.__textRect[0] - 50, self.__textRect[1] - 25))
+                SCREEN.blit(self.__onButtonImage , (self.__textRect[0] - self.__onButtonImage.get_width()//5, self.__textRect[1] - 25))
             
             if self.__squareCheck:
                 pygame.draw.rect(SCREEN, self.__squareOnColour, self.__square)
                 SCREEN.blit(self.__text, self.__textRect)
-                    
             else:
                 SCREEN.blit(self.__textOn, self.__textRect)
                    
         elif disabled:
             if self.__offButtonImage:
-                SCREEN.blit(self.__offButtonImage, (self.__textRect[0] - 50, self.__textRect[1] - 25))
+                SCREEN.blit(self.__offButtonImage, (self.__textRect[0] - self.__offButtonImage.get_width()//5, self.__textRect[1] - 25))
 
             if self.__squareCheck:
                 pygame.draw.rect(SCREEN, disabledColour, self.__square)
@@ -100,7 +102,7 @@ class Button(pygame.sprite.Sprite):
 
         else:
             if self.__offButtonImage:
-                SCREEN.blit(self.__offButtonImage , (self.__textRect[0] - 50, self.__textRect[1] - 25))
+                SCREEN.blit(self.__offButtonImage , (self.__textRect[0] - self.__offButtonImage.get_width()//5, self.__textRect[1] - 25))
 
             if self.__squareCheck:
                 pygame.draw.rect(SCREEN, self.__squareOffColour, self.__square)
@@ -110,7 +112,7 @@ class Button(pygame.sprite.Sprite):
                 SCREEN.blit(self.__textOff, self.__textRect)
             
     # Check If Button Is Clicked
-    def MouseClick(self) -> bool:
+    def MouseClick(self, jumpOff:bool=False) -> bool:
         """
         Method to check if button has been clicked
         """
@@ -121,6 +123,9 @@ class Button(pygame.sprite.Sprite):
         if pygame.mouse.get_pressed()[0] and pygame.mouse.get_pos()[0] in range(self.__x-self.__width//2, self.__x+self.__width//2) and pygame.mouse.get_pos()[1] in range(self.__y-self.__height//2, self.__y+self.__height//2) and not self.__clicked and self.active:
             if self.__singleClick:
                 self.__clicked = True
+            if jumpOff:
+                pygame.mouse.set_pos(pygame.mouse.get_pos()[0] + 150, pygame.mouse.get_pos()[1])
+                time.sleep(0.1)
             return True
         else:
             return False

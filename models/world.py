@@ -31,7 +31,7 @@ class World():
     World class to control game events and information such as the map and enemy spawn data
     """
 
-    def __init__(self) -> None:
+    def __init__(self, level:int=1) -> None:
         """
         Constructor for world class
         """
@@ -41,16 +41,23 @@ class World():
         self.health = BASE_HEALTH
         self.money = MONEY
         self.enemyList = []
-        
-        #with open('Year 12 ATAR/Project 1/sprite images/map1.json') as file:
-        with open('sprite images/map1.json') as file:
-            self.__worldData = json.load(file)
-        self.__image = Try_Load('map1.png', 'image')
         self.waypoints = []
         self.tilemap = [] 
         self.spawnedEnemies =  0 
         self.killedEnemies = 0
         self.missedEnemies = 0
+
+        if level == 1:
+            with open('sprite images/map1.json') as file:
+                self.__worldData = json.load(file)
+            self.__image = Try_Load('map1.png', 'image')
+            self.y_offset = 70
+        
+        elif level == 2:
+            with open('sprite images/map2.json') as file:
+                self.__worldData = json.load(file)
+            self.__image = Try_Load('map2.png', 'image')
+            self.y_offset = 250
 
     # Prossesing Data From .json File
     def processData(self) -> None:
@@ -75,7 +82,7 @@ class World():
 
         for point in data:
             x_coordinant = point.get("x")
-            y_coordinant = point.get("y") + 70
+            y_coordinant = point.get("y") + self.y_offset
             self.waypoints.append((x_coordinant, y_coordinant))
 
     # Processing Enemy Spawning

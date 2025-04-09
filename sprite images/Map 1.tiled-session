@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map1.json",
+    "activeFile": "",
     "expandedProjectPaths": [
         "."
     ],
@@ -13,8 +13,8 @@
             "scale": 0.782,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": -97.82608695652175,
-                "y": 452.0460358056266
+                "x": -297.3145780051151,
+                "y": 372.1227621483376
             }
         },
         "towerDefense_tilesheet.tsx": {
@@ -23,6 +23,7 @@
         }
     },
     "last.exportedFilePath": "/Users/ryan/Desktop/stuff/code/Year 12 ATAR/Project 1/sprite images",
+    "last.externalTilesetPath": "/Users/ryan/Desktop/stuff/code/Year 12 ATAR/TowerDefence/sprite images",
     "last.imagePath": "/Users/ryan/Desktop/stuff/code/Year 12 ATAR/Project 1/sprite images/kenney_tower-defense-top-down/Tilesheet",
     "map.height": 15,
     "map.lastUsedExportFilter": "All Files (*)",
@@ -30,7 +31,6 @@
     "map.tileWidth": 48,
     "map.width": 15,
     "openFiles": [
-        "map1.json"
     ],
     "project": "Map 1.tiled-project",
     "recentFiles": [

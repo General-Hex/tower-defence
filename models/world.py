@@ -31,7 +31,7 @@ class World():
     World class to control game events and information such as the map and enemy spawn data
     """
 
-    def __init__(self, level:int=1) -> None:
+    def __init__(self, level:int) -> None:
         """
         Constructor for world class
         """
@@ -46,6 +46,7 @@ class World():
         self.spawnedEnemies =  0 
         self.killedEnemies = 0
         self.missedEnemies = 0
+        self.level = level
 
         if level == 1:
             with open('sprite images/map1.json') as file:
@@ -90,14 +91,23 @@ class World():
         """
         Method to handle the spawning of enemies in waves
         """
+        if self.level == 1:
+            if self.wave < WAVE_COUNT1 + 1:
+                enemies = ENEMY_COUNT1[self.wave -1]
 
-        if self.wave < WAVE_COUNT + 1:
-            enemies = ENEMY_COUNT[self.wave -1]
+                for enemy_type in enemies:
+                    enemies_to_spawn = enemies[enemy_type]
+                    for i in range(enemies_to_spawn):
+                        self.enemyList.append(enemy_type)
+        
+        elif self.level == 2:
+            if self.wave < WAVE_COUNT2 + 1:
+                enemies = ENEMY_COUNT2[self.wave -1]
 
-            for enemy_type in enemies:
-                enemies_to_spawn = enemies[enemy_type]
-                for i in range(enemies_to_spawn):
-                    self.enemyList.append(enemy_type)
+                for enemy_type in enemies:
+                    enemies_to_spawn = enemies[enemy_type]
+                    for i in range(enemies_to_spawn):
+                        self.enemyList.append(enemy_type)
 
         random.shuffle(self.enemyList)
 

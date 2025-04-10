@@ -174,13 +174,13 @@ class MainGame(GameState):
         super().__init__()
         self.__nextScreen = None
     
-    def enter(self, clock) -> str:
+    def enter(self, clock:pygame.time.Clock, level:int) -> str:
         """
         Overide method for main game to initilise itself in the current game
         """
 
         # Game World Setup
-        world = World()
+        world = World(level)
         world.processData()
         world.processEnemies()
 
@@ -259,7 +259,10 @@ class MainGame(GameState):
                     gameOutcome = -1 
                 
                 # Checking Game Won
-                if world.wave > WAVE_COUNT + 1:
+                if world.level == 1: waveCount = WAVE_COUNT1
+                elif world.level == 2: waveCount = WAVE_COUNT2
+                
+                if world.wave > waveCount + 1:
                     pygame.mixer.music.stop()
                     Try_Load('victory_theme.mp3', 'music')
                     pygame.mixer.music.play(loops=-1)
@@ -387,7 +390,7 @@ class LevelsPage(GameState):
         """
         super().__init__()
     
-    def enter(self, clock) -> str:
+    def enter(self, clock:pygame.time.Clock) -> str | list:
         """
         Overide method for levels page to initilise itself in the current game
         """
@@ -420,14 +423,19 @@ class LevelsPage(GameState):
                 return self.exit()
             
             if levelOneButton.MouseClick(True):
-                self.__nextScreen = 'main game'
+                self.__nextScreen = ['main game', '1']
+                self.active = False
+                return self.exit()
+
+            if levelTwoButton.MouseClick(True):
+                self.__nextScreen = ['main game', '2']
                 self.active = False
                 return self.exit()
             
             pygame.display.flip()
 
     
-    def exit(self) -> str:
+    def exit(self) -> str | list:
         return self.__nextScreen
         
 

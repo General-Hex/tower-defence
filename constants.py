@@ -65,7 +65,30 @@ TURRET_DATA = [
 ]
 
 # Wave Data
-ENEMY_COUNT = [
+ENEMY_COUNT1 = [
+    { # wave 1
+    "zombie":1,
+    },
+
+    { # wave 2
+    "zombie":3
+    },
+
+    { # wave 3
+    "zombie":6
+    },
+
+    { # wave 4
+    "zombie":8
+    },
+
+    { # wave 5
+    "zombie":20
+    },
+
+]
+
+ENEMY_COUNT2 = [
     { # wave 1
     "zombie":3,
     },
@@ -88,7 +111,10 @@ ENEMY_COUNT = [
     },
 
 ]
-WAVE_COUNT = len(ENEMY_COUNT)
+
+WAVE_COUNT1 = len(ENEMY_COUNT1)
+WAVE_COUNT2 = len(ENEMY_COUNT1)
+
 
 # Game Fonts
 FONT = pygame.font.SysFont('Consolas', 80, bold=True)

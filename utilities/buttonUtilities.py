@@ -36,12 +36,13 @@ def buttonSetup(doubleSpeed:bool, levelStarted:bool, placingTurrets:bool, world:
         if turretType == "cannon":
             placingTurrets = False
 
-    if world.money >= demoMachinelaser.cost:
-        buyMachinelaserButton.MouseCheck(SCREEN)
-    else:
-        buyMachinelaserButton.MouseCheck(SCREEN, True, (220, 220, 220))
-        if turretType == "machinelaser":
-            placingTurrets = False
+    if world.level >= 2:
+        if world.money >= demoMachinelaser.cost:
+            buyMachinelaserButton.MouseCheck(SCREEN)
+        else:
+            buyMachinelaserButton.MouseCheck(SCREEN, True, (220, 220, 220))
+            if turretType == "machinelaser":
+                placingTurrets = False
 
     # Updating Cancel Button
     if placingTurrets:

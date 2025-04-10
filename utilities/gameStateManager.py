@@ -21,9 +21,9 @@ class GameStateManager():
 
             elif self.__screen == 'levels':
                 self.__screen = self.__LevelsState.enter(self.__clock)
-            
-            elif self.__screen == 'main game':
-                self.__screen = self.__MainGameState.enter(self.__clock)
+        
+            elif self.__screen[0] == 'main game':
+                self.__screen = self.__MainGameState.enter(self.__clock, int(self.__screen[1]))
         
             
                 

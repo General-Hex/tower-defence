@@ -337,7 +337,7 @@ class MainGame(GameState):
                     placingTurrets = False
                     selectedTurret = None
                     lastEnemySpawn = pygame.time.get_ticks()
-                    world = World()
+                    world = World(world.level)
                     world.processData()
                     world.processEnemies()
                     allEnemies.empty()

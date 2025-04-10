@@ -33,7 +33,7 @@ TURRET_ANIMATION_FRAMES = 8
 ANIMATION_DELAY = 15
 SPAWN_COOLDOWN = 800
 BASE_HEALTH = 100
-MONEY = 650
+MONEY = 350
 WAVE_COMPLEATION_REWARD = 500
 GRASS_TILE_VALUES = [121, 268, 49]
 
@@ -94,7 +94,8 @@ ENEMY_COUNT2 = [
     },
 
     { # wave 2
-    "zombie":5
+    "zombie":5,
+    "skeleton":3
     },
 
     { # wave 3
@@ -106,8 +107,8 @@ ENEMY_COUNT2 = [
     },
 
     { # wave 5
-    "zombie":10,
-    "skeleton":20
+    "zombie":30,
+    "skeleton":25
     },
 
 ]

@@ -317,9 +317,11 @@ class MainGame(GameState):
 
             # GAME OVER
             else:
-                if not finalTime:
-                    finalTime = int(time.time() - startTime)
-                score = 1000 - finalTime
+                if not finalTime: finalTime = int(time.time() - startTime)
+                if world.level == 1:
+                    score = WAVE_COUNT1 * 60 + world.health - finalTime
+                elif world.level == 2:
+                    score = WAVE_COUNT2 * 60 + world.health - finalTime
                 pygame.draw.rect(SCREEN, (0, 0, 0), (200, 200, 500, 200), border_radius=30)
                 restartButton.MouseCheck(SCREEN)
                 mainMenuButton.MouseCheck(SCREEN)
@@ -330,8 +332,8 @@ class MainGame(GameState):
                 # Game Won
                 elif gameOutcome == 1:
                     addText("YOU WIN", FONT, (0, 200, 0), SCREEN_WIDTH//2-100, SCREEN_HEIGHT//2-130)    
-
-                addText("Score: " + str(score), FONT3, (255,255,255), SCREEN_WIDTH//2, SCREEN_HEIGHT//2 - 150)
+                    addText("Score: " + str(score), FONT3, (255,255,255), SCREEN_WIDTH//2, SCREEN_HEIGHT//2 - 150)
+                
                 # Restarting Game
                 if restartButton.MouseClick(True):
                     gameOver = False 

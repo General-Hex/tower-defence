@@ -39,129 +39,123 @@ The purpose of my project was to create a fun and interactive tower defence game
 - ensure all files are in correct directory as shown in [Files](#files)
 
 ## Files
-README.md
+[README.md](README.md)
 
-\_\_main\_\_.py
+[\_\_main\_\_.py](__main__.py)
 
-constants.py
+[constants.py](constants.py)
 
-files.txt
+[gitupdate.sh](gitupdate.sh)
 
-gitupdate.sh
+[otherFunctions.py](otherFunctions.py)
 
-otherFunctions.py
-
-unitTesting.py
+[unitTesting.](unitTesting.py)
 
 ### ./Deliverables:
-- Class Diagram.png
+- [Class Diagram.png](Deliverables/Class%20Diagram.png)
 
-- Deliverable 1- Project Proposal & Requirements Specification by Ryan Beikrasouli.docx
+- [Deliverable 1- Project Proposal & Requirements Specification by Ryan Beikrasouli.docx](Deliverables/Deliverable%201-%20Project%20Proposal%20&%20Requirements%20Specification%20by%20Ryan%20Beikrasouli.docx)
 
-- Deliverable 1- Project Proposal & Requirements Specification by Ryan Beikrasouli.pdf
+- [Deliverable 1- Project Proposal & Requirements Specification by Ryan Beikrasouli.pdf](Deliverables/Deliverable%201-%20Project%20Proposal%20&%20Requirements%20Specification%20by%20Ryan%20Beikrasouli.pdf)
 
-- Deliverable 2- Detailed Project Design Document by Ryan Beikrasouli.docx
+- [Deliverable 2- Detailed Project Design Document by Ryan Beikrasouli.docx](Deliverables/Deliverable%202-%20Detailed%20Project%20Design%20Document%20by%20Ryan%20Beikrasouli.docx)
 
-- Deliverable 2- Detailed Project Design Document by Ryan Beikrasouli.pdf
+- [Deliverable 2- Detailed Project Design Document by Ryan Beikrasouli.pdf](Deliverables/Deliverable%202-%20Detailed%20Project%20Design%20Document%20by%20Ryan%20Beikrasouli.pdf)
 
-- Deliverable 3 - Initial Prototype - Development Milestone by Ryan Beikrasouli.docx
+- [Deliverable 3 - Initial Prototype - Development Milestone by Ryan Beikrasouli.docx](Deliverables/Deliverable%203%20-%20Initial%20Prototype%20-%20Development%20Milestone%20by%20Ryan%20Beikrasouli.docx)
 
-- Flow Chart.docx
+- [Flow Chart.docx](Deliverables/Flow%20Chart.docx)
 
-- ~$liverable 1- Project Proposal & Requirements Specification by Ryan Beikrasouli.docx
+- [~$liverable 1- Project Proposal & Requirements Specification by Ryan Beikrasouli.docx](Deliverables/~$liverable%201-%20Project%20Proposal%20&%20Requirements%20Specification%20by%20Ryan%20Beikrasouli.docx)
 
-- ~$liverable 2- Detailed Project Design Document by Ryan Beikrasouli .docx
+- [~$liverable 2- Detailed Project Design Document by Ryan Beikrasouli .docx](Deliverables/~$liverable%202-%20Detailed%20Project%20Design%20Document%20by%20Ryan%20Beikrasouli%20.docx)
 
 ### ./Sound Assets:
-- gun_shot.wav
+- [gun_shot.wav](Sound%20Assets/gun_shot.wav)
 
-- laser_shot.wav
+- [laser_shot.wav](Sound%20Assets/laser_shot.wav)
 
-- loss_theme.mp3
+- [loss_theme.mp3](Sound%20Assets/loss_theme.mp3)
 
-- main_theme.mp3
+- [main_theme.mp3](Sound%20Assets/main_theme.mp3)
 
-- upgrade_sound.wav
+- [upgrade_sound.wav](Sound%20Assets/upgrade_sound.wav)
 
-- victory_theme.mp3
+- [victory_theme.mp3](Sound%20Assets/victory_theme.mp3)
 
 ### ./models:
-- \_\_init\_\_.py
+- [\_\_init\_\_.py](models/__init__.py)
 
-- buttons.py
+- [buttons.py](models/buttons.py)
 
-- enemies.py
+- [enemies.py](models/enemies.py)
 
-- gameStates.py
+- [gameStates.py](models/gameStates.py)
 
-- turrets.py
+- [turrets.py](models/turrets.py)
 
-- world.py
+- [world.py](models/world.py)
 
 ### ./sprite images:
-- Adobe Express - file (1) copy.png
-- Default Assets
-- Map 1.tiled-project
-- Map 1.tiled-session
-- Skeleton Assets
-- Turret Assets
-- Zombie Assets
-- hp_bar.png
-- levels_button_off.png
-- levels_button_on.png
-- login_button_off.png
-- login_button_on.png
-- main_logo.png
-- main_logo2.png
-- map1.json
-- map1.png
-- map2.json
-- map2.png
-- map2.tmx
-- pause_button.png
-- quit_button_off.png
-- quit_button_on.png
+- [Adobe Express - file (1) copy.png](sprite%20images/Adobe%20Express%20-%20file%20(1)%20copy.png)
+- [Map 1.tiled-project](sprite%20images/Map%201.tiled-project)
+- [Map 1.tiled-session](sprite%20images/Map%201.tiled-session)
+- [hp_bar.png](sprite%20images/hp_bar.png)
+- [levels_button_off.png](sprite%20images/levels_button_off.png)
+- [levels_button_on.png](sprite%20images/levels_button_on.png)
+- [login_button_off.png](sprite%20images/login_button_off.png)
+- [login_button_on.png](sprite%20images/login_button_on.png)
+- [main_logo.png](sprite%20images/main_logo.png)
+- [main_logo2.png](sprite%20images/main_logo2.png)
+- [map1.json](sprite%20images/map1.json)
+- [map1.png](sprite%20images/map1.png)
+- [map2.json](sprite%20images/map2.json)
+- [map2.png](sprite%20images/map2.png)
+- [map2.tmx](sprite%20images/map2.tmx)
+- [pause_button.png](sprite%20images/pause_button.png)
+- [quit_button_off.png](sprite%20images/quit_button_off.png)
+- [quit_button_on.png](sprite%20images/quit_button_on.png)
 
 #### ./sprite images/Default Assets:
-- default_sprite 1.png
-- default_sprite 2.png
-- default_sprite 3.png
-- default_sprite 4.png
-- default_sprite 5.png
-- default_sprite 6.png
+- [default_sprite 1.png](sprite%20images/Default%20Assets/default_sprite%201.png)
+- [default_sprite 2.png](sprite%20images/Default%20Assets/default_sprite%202.png)
+- [default_sprite 3.png](sprite%20images/Default%20Assets/default_sprite%203.png)
+- [default_sprite 4.png](sprite%20images/Default%20Assets/default_sprite%204.png)
+- [default_sprite 5.png](sprite%20images/Default%20Assets/default_sprite%205.png)
+- [default_sprite 6.png](sprite%20images/Default%20Assets/default_sprite%206.png)
 
 #### ./sprite images/Skeleton Assets:
-- skeleton 1.png
-- skeleton 2.png
-- skeleton 3.png
-- skeleton 4.png
+- [skeleton 1.png](sprite%20images/Skeleton%20Assets/skeleton%201.png)
+- [skeleton 2.png](sprite%20images/Skeleton%20Assets/skeleton%202.png)
+- [skeleton 3.png](sprite%20images/Skeleton%20Assets/skeleton%203.png)
+- [skeleton 4.png](sprite%20images/Skeleton%20Assets/skeleton%204.png)
 
 #### ./sprite images/Turret Assets:
-- cannon_tier_1.png
-- cannon_tier_2.png
-- cannon_tier_3.png
-- cannon_tier_4.png
-- machine_laser_tier_1.png
-- machine_laser_tier_2.png
-- machine_laser_tier_3.png
-- machine_laser_tier_4.png
+- [cannon_tier_1.png](sprite%20images/Turret%20Assets/cannon_tier_1.png)
+- [cannon_tier_2.png](sprite%20images/Turret%20Assets/cannon_tier_2.png)
+- [cannon_tier_3.png](sprite%20images/Turret%20Assets/cannon_tier_3.png)
+- [cannon_tier_4.png](sprite%20images/Turret%20Assets/cannon_tier_4.png)
+- [machine_laser_tier_1.png](sprite%20images/Turret%20Assets/machine_laser_tier_1.png)
+- [machine_laser_tier_2.png](sprite%20images/Turret%20Assets/machine_laser_tier_2.png)
+- [machine_laser_tier_3.png](sprite%20images/Turret%20Assets/machine_laser_tier_3.png)
+- [machine_laser_tier_4.png](sprite%20images/Turret%20Assets/machine_laser_tier_4.png)
 
 #### ./sprite images/Zombie Assets:
-- zombie 1.png
-- zombie 2.png
-- zombie 3.png
-- zombie 4.png
-- zombie 5.png
-- zombie 6.png
-- zombie 7.png
-- zombie 8.png
-- zombie 9.png
+- [zombie 1.png](sprite%20images/Zombie%20Assets/zombie%201.png)
+- [zombie 2.png](sprite%20images/Zombie%20Assets/zombie%202.png)
+- [zombie 3.png](sprite%20images/Zombie%20Assets/zombie%203.png)
+- [zombie 4.png](sprite%20images/Zombie%20Assets/zombie%204.png)
+- [zombie 5.png](sprite%20images/Zombie%20Assets/zombie%205.png)
+- [zombie 6.png](sprite%20images/Zombie%20Assets/zombie%206.png)
+- [zombie 7.png](sprite%20images/Zombie%20Assets/zombie%207.png)
+- [zombie 8.png](sprite%20images/Zombie%20Assets/zombie%208.png)
+- [zombie 9.png](sprite%20images/Zombie%20Assets/zombie%209.png)
 
 ### ./utilities:
-- \_\_init\_\_.py
-- buttonUtilities.py
-- gameStateManager.py
-- mainUtilities.py
+- [\_\_init\_\_.py](utilities/__init__.py)
+- [buttonUtilities.py](utilities/buttonUtilities.py)
+- [gameStateManager.py](utilities/gameStateManager.py)
+- [mainUtilities.py](utilities/mainUtilities.py)
 
 ## HOW TO PLAY:
 - Ensure all [requirements](#requirements) are installed properly

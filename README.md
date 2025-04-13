@@ -41,7 +41,7 @@ The purpose of my project was to create a fun and interactive tower defence game
 ## Files
 README.md
 
-_\_main__.py
+\_\_main\_\_.py
 
 constants.py
 
@@ -86,7 +86,7 @@ unitTesting.py
 - victory_theme.mp3
 
 ### ./models:
-- _\_init__.py
+- \_\_init\_\_.py
 
 - buttons.py
 
@@ -158,7 +158,7 @@ unitTesting.py
 - zombie 9.png
 
 ### ./utilities:
-- _\_init__.py
+- \_\_init\_\_.py
 - buttonUtilities.py
 - gameStateManager.py
 - mainUtilities.py

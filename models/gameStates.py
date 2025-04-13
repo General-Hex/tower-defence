@@ -300,7 +300,9 @@ class MainGame(GameState):
                     world.money += WAVE_COMPLEATION_REWARD 
 
                 # Drawing Enemies
-                allEnemies.draw(SCREEN)   
+                allEnemies.draw(SCREEN)
+                for enemy in allEnemies:
+                    SCREEN.blit(enemy.hpBar, enemy.hpBarRect, ((0, 0, enemy.hpBar.get_width()//enemy.maxHealth*enemy.health, enemy.hpBar.get_height())))
                 
                 # Displaying Game Text
                 displayGameTexts(world, selectedTurret)

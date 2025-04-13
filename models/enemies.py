@@ -54,7 +54,8 @@ class Enemy(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         # ENEMY ATRIBUTES 
         # General
-        self.health = 0
+        self.maxHealth = 1
+        self.health = 1
         self.worth =  0
         self.damage = 0
         self.movementSpeed = 0
@@ -73,6 +74,10 @@ class Enemy(pygame.sprite.Sprite):
         self.originalImage.set_colorkey((0, 0, 0), RLEACCEL)
         self.originalImage = pygame.transform.scale(self.originalImage,(self.originalImage.get_width()//5, self.originalImage.get_height()//5))
         self.image = pygame.transform.rotate(self.originalImage, self.__rotationAngle)
+        self.hpBar = Try_Load("hp_bar.png", 'image')
+        self.hpBar = pygame.transform.scale(self.hpBar, (self.hpBar.get_width()//3, self.hpBar.get_height()//2))
+        self.hpBar.set_colorkey((0, 0, 0), RLEACCEL)
+        self.hpBarRect = self.hpBar.get_rect(center=(self.pos[0], self.pos[1]-50))
         
         # Positioning
         self.rect = self.image.get_rect()
@@ -124,6 +129,7 @@ class Enemy(pygame.sprite.Sprite):
             
             
         self.rect.center = self.pos
+        self.hpBarRect = self.hpBar.get_rect(center=(self.pos[0], self.pos[1]-50))
 
 # Animating Enemy
     def animate(self) -> None:
@@ -178,6 +184,7 @@ class Zombie(Enemy):
         """
 
         super().__init__(movementWaypoints)
+        self.maxHealth = 20
         self.health = 20
         self.movementSpeed = 1
         self.worth = 10
@@ -199,6 +206,7 @@ class Zombie(Enemy):
         self.originalImage = Try_Load("Zombie Assets/zombie " + str(self.imageIndex) + ".png", 'image')
         self.originalImage.set_colorkey((0, 0, 0), RLEACCEL)
         self.originalImage = pygame.transform.scale(self.originalImage,(self.originalImage.get_width()//5, self.originalImage.get_height()//5))
+        
 
 class Skeleton(Enemy):
     """
@@ -211,6 +219,7 @@ class Skeleton(Enemy):
         """
 
         super().__init__(movementWaypoints)
+        self.maxHealth = 5
         self.health = 5
         self.movementSpeed = 5
         self.worth = 5

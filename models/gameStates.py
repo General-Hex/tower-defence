@@ -103,6 +103,7 @@ class MainMenu(GameState):
         """
         Main menu constructor
         """
+        # Initilising Parent Class
         super().__init__()
 
     def enter(self, clock, setup:bool=False) -> str:
@@ -110,6 +111,7 @@ class MainMenu(GameState):
         Overide method for main menu to initilise itself in the current game
         """
 
+        # Main Menu Variables
         logoImage = Try_Load('main_logo.png', 'image')
         logo = pygame.transform.scale_by(logoImage, 1.5)
         logoRect = logo.get_rect(center=(SCREEN_HEIGHT//2, SCREEN_WIDTH//2))
@@ -119,8 +121,7 @@ class MainMenu(GameState):
         self.active = True
         self.__nextScreen = None
         
-
-        
+        # If Initial Game Launch Play Music, Set Screen Size and Set Caption
         if setup or True:
             pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
             pygame.display.set_caption("Tower Defence Mayhem")
@@ -128,8 +129,11 @@ class MainMenu(GameState):
             pygame.mixer.music.set_volume(0.6)
             pygame.mixer.music.play(loops=-1)
 
+        # Main Menu Main Loop
         while self.active:
             clock.tick(FPS)
+
+            # Adding Background and Buttons to Screen
             SCREEN.blit(logo, logoRect)
             levelsButton.MouseCheck(SCREEN)
             loginButton.MouseCheck(SCREEN, True, (160, 160, 160))
@@ -142,6 +146,7 @@ class MainMenu(GameState):
                     pygame.quit()
                     quit()
             
+            # Handling Button Clicks
             if levelsButton.MouseClick(True):
                 self.__nextScreen = 'levels'
                 self.active = False
@@ -317,14 +322,16 @@ class MainGame(GameState):
 
             # GAME OVER
             else:
+                # Calculating Score 
                 if not finalTime: finalTime = int(time.time() - startTime)
-                if world.level == 1:
-                    score = WAVE_COUNT1 * 60 + world.health - finalTime
-                elif world.level == 2:
-                    score = WAVE_COUNT2 * 60 + world.health - finalTime
+                if world.level == 1: score = WAVE_COUNT1 * 60 + world.health - finalTime
+                elif world.level == 2: score = WAVE_COUNT2 * 60 + world.health - finalTime
+                
+                # Drawing End Game Box and Buttons
                 pygame.draw.rect(SCREEN, (0, 0, 0), (200, 200, 500, 200), border_radius=30)
                 restartButton.MouseCheck(SCREEN)
                 mainMenuButton.MouseCheck(SCREEN)
+                
                 # Game Loss
                 if gameOutcome == -1:
                     addText("GAME OVER", FONT, (255, 0, 0), SCREEN_WIDTH//2-130, SCREEN_HEIGHT//2-130)    
@@ -347,6 +354,7 @@ class MainGame(GameState):
                     allEnemies.empty()
                     allTurrets.empty()
                 
+                # Returning to Main Menu
                 if mainMenuButton.MouseClick(True):
                     self.__nextScreen = 'main menu'
                     return self.exit()
@@ -370,7 +378,6 @@ class MainGame(GameState):
                         if placingTurrets:
                             allTurrets = createTurret(mousePos, allTurrets, world, turretType)
                             
-
                         else:
                             selectedTurret = selectTurret(mousePos, allTurrets)
 
@@ -399,6 +406,7 @@ class LevelsPage(GameState):
         Overide method for levels page to initilise itself in the current game
         """
 
+        # Levels Page Variables
         self.active = True
         levelOneButton = Button(FONT2, 'Level 1', (255, 255, 255), (255, 255, 0), (244, 187, 68), SCREEN_WIDTH//2, 100, 275, 50, False, True, Try_Load('levels_button_on.png', 'image'), Try_Load('levels_button_off.png', 'image'), 1.7)
         levelTwoButton = Button(FONT2, 'Level 2', (255, 255, 255), (255, 255, 0), (244, 187, 68), SCREEN_WIDTH//2, 225, 275, 50, False, True, Try_Load('levels_button_on.png', 'image'), Try_Load('levels_button_off.png', 'image'), 1.7)
@@ -407,20 +415,24 @@ class LevelsPage(GameState):
         logo = pygame.transform.scale_by(logoImage, 1.5)
         logoRect = logo.get_rect(center=(SCREEN_HEIGHT//2, SCREEN_WIDTH//2))
 
-
+        # Levels Page Main Loop
         while self.active:
             clock.tick(FPS)
+
+            # Adding Background and Buttons to Screen
             SCREEN.blit(logo, logoRect)
             levelOneButton.MouseCheck(SCREEN)
             levelTwoButton.MouseCheck(SCREEN)
             backButton.MouseCheck(SCREEN)
 
+            # Event Handling
             for event in pygame.event.get():
                 # Exiting Game
                 if event.type == pygame.QUIT or event.type == KEYDOWN and event.key == K_ESCAPE:
                     pygame.quit()
                     quit()
             
+            # Handling Button Clicks
             if backButton.MouseClick(True):
                 self.__nextScreen = 'main menu'
                 self.active = False
@@ -441,8 +453,3 @@ class LevelsPage(GameState):
     
     def exit(self) -> str | list:
         return self.__nextScreen
-        
-
-
-    
-    

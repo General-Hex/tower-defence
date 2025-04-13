@@ -34,7 +34,7 @@ The purpose of my project was to create a fun and interactive tower defence game
 |The player must be given a score apon winning| I implemeted a simple score calculation in [gameStates.py](models/gameStates.py) which gives a player a score based on the speed of level compleation and how much health their base has left and only if they have sucessfully beat the level. This score is not saved yet however in future I do plan on expanding on and using this score for further uses|
 
 ## REQUIREMENTS
-- pygame version ≥ 2.5.2
+- pygame version ≥ 2.5.2 | install using _pip install pygame_
 - python version ≥ 3.11
 - ensure all files are in correct directory as shown in [Files](#files)
 

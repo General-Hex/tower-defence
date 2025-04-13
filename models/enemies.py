@@ -89,6 +89,7 @@ class Enemy(pygame.sprite.Sprite):
         Method to update enemy animation and movement
         """
 
+        # Double/Undouble Enemy Speed if Required
         if doubleSpeed and not self.__speedDoubled:
             self.movementSpeed *= 2
             self.__speedDoubled = True
@@ -109,15 +110,18 @@ class Enemy(pygame.sprite.Sprite):
         Method to move enemy to next waypoint
         """
 
+        # Check That There is Still Another Waypoint for the Enemy to go to
         if self.__nextWaypointIndex <= len(self.__waypoints) - 1:
             self.target = Vector2(self.__waypoints[self.__nextWaypointIndex])
             self.__movement = self.target - self.pos
         
+        # If There isn't Remove the Enemy and Inflict Damage on the Player's Base
         else:
             self.kill()
             world.health -= self.damage
             world.missedEnemies += 1 
         
+        # Getting the Distance and Movement Vector to the Next Waypoint
         self.target_distance = self.__movement.length()
         if self.target_distance >= self.movementSpeed:
             self.pos += self.__movement.normalize() * self.movementSpeed
@@ -126,7 +130,6 @@ class Enemy(pygame.sprite.Sprite):
                 self.pos += self.__movement.normalize() * self.target_distance
             
             self.__nextWaypointIndex += 1
-            
             
         self.rect.center = self.pos
         self.hpBarRect = self.hpBar.get_rect(center=(self.pos[0], self.pos[1]-50))
@@ -137,6 +140,7 @@ class Enemy(pygame.sprite.Sprite):
         Method to animate the enemy sprite
         """
 
+        # Loading Enemy Images in Sequencial Order
         if self.imageIndex + 1 > 6:
             self.imageIndex = 1
         
@@ -153,6 +157,7 @@ class Enemy(pygame.sprite.Sprite):
         Method to update rotation of enemy sprite
         """
 
+        # Rotating the Enemy Sprite if the Enemy is Supposed to Change Directions
         distance = self.target - self.pos
         self.__rotationAngle = math.degrees(math.atan2(-distance[1], distance[0]))
         rotateX = int(self.__rotationAngle) < -175 or int(self.__rotationAngle) > 175
@@ -167,6 +172,7 @@ class Enemy(pygame.sprite.Sprite):
         Method to check if enemy is still alive
         """
 
+        # If the Enemy is Dead Remove the Enemy and Update World Data and Money
         if self.health <= 0:
             world.money += self.worth
             world.killedEnemies += 1
@@ -182,7 +188,7 @@ class Zombie(Enemy):
         """
         Zombie constructor
         """
-
+        # Zombie Assets
         super().__init__(movementWaypoints)
         self.maxHealth = 20
         self.health = 20
@@ -196,7 +202,7 @@ class Zombie(Enemy):
         """
         Overiding method to animate zombie sprite
         """
-
+        # Loading Zombie Images in Sequencial Order
         if self.imageIndex + 1 > 8:
             self.imageIndex = 1
         
@@ -217,7 +223,7 @@ class Skeleton(Enemy):
         """
         Skeleton constructor
         """
-
+        # Skeleton Attributes
         super().__init__(movementWaypoints)
         self.maxHealth = 5
         self.health = 5
@@ -231,7 +237,7 @@ class Skeleton(Enemy):
         """
         Overiding method to animate skeleton sprite
         """
-        
+        # Loading Skeleton Images in Sequencial Order
         if self.imageIndex + 1 > 4:
             self.imageIndex = 1
         

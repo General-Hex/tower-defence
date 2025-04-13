@@ -91,6 +91,8 @@ class World():
         """
         Method to handle the spawning of enemies in waves
         """
+
+        # Spawning Enemies for Level 1
         if self.level == 1:
             if self.wave < WAVE_COUNT1 + 1:
                 enemies = ENEMY_COUNT1[self.wave -1]
@@ -100,6 +102,7 @@ class World():
                     for i in range(enemies_to_spawn):
                         self.enemyList.append(enemy_type)
         
+        # Spawning Enemies for Level 2
         elif self.level == 2:
             if self.wave < WAVE_COUNT2 + 1:
                 enemies = ENEMY_COUNT2[self.wave -1]
@@ -109,6 +112,7 @@ class World():
                     for i in range(enemies_to_spawn):
                         self.enemyList.append(enemy_type)
 
+        # Randomly Shuffling Enemies to be Spawned
         random.shuffle(self.enemyList)
 
     # Checking Wave Compleation

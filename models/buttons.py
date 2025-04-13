@@ -40,8 +40,7 @@ class Button(pygame.sprite.Sprite):
         self.__singleClick = singleClick
         self.__textColour = textColour
         self.__rawText = text
-        self.active = False
-        
+        self.active = False  
         self.__onButtonImage = onImage
         self.__offButtonImage = offImage
 
@@ -75,10 +74,12 @@ class Button(pygame.sprite.Sprite):
         """
 
         self.active = True
+        # Update Button's Text
         if newText:
             self.__text = self.__font.render(str(newText), self.__textColour, self.__textColour)
             self.__textRect = self.__text.get_rect(center=(self.__x, self.__y))
 
+        # If Mouse is Hovering Over Button Highlight the Button
         if pygame.mouse.get_pos()[0] in range(self.__x-self.__width//2, self.__x+self.__width//2) and pygame.mouse.get_pos()[1] in range(self.__y-self.__height//2, self.__y+self.__height//2) and not disabled:
             if self.__onButtonImage:
                 SCREEN.blit(self.__onButtonImage , (self.__textRect[0] - self.__onButtonImage.get_width()//5, self.__textRect[1] - 25))
@@ -88,7 +89,8 @@ class Button(pygame.sprite.Sprite):
                 SCREEN.blit(self.__text, self.__textRect)
             else:
                 SCREEN.blit(self.__textOn, self.__textRect)
-                   
+        
+        # If the Button is Disabled Display Off Image
         elif disabled:
             if self.__offButtonImage:
                 SCREEN.blit(self.__offButtonImage, (self.__textRect[0] - self.__offButtonImage.get_width()//5, self.__textRect[1] - 25))
@@ -100,6 +102,7 @@ class Button(pygame.sprite.Sprite):
             else:
                 SCREEN.blit(self.__font.render(self.__rawText, disabledColour, disabledColour), self.__textRect)
 
+        # By Default the Button's Off Image is Displayed
         else:
             if self.__offButtonImage:
                 SCREEN.blit(self.__offButtonImage , (self.__textRect[0] - self.__offButtonImage.get_width()//5, self.__textRect[1] - 25))
@@ -117,9 +120,11 @@ class Button(pygame.sprite.Sprite):
         Method to check if button has been clicked
         """
 
+        # If Left Click is not Pressed Return False
         if not pygame.mouse.get_pressed()[0]:
             self.__clicked = False
         
+        # If Left Click is Pressed Within the Button's Area Return True
         if pygame.mouse.get_pressed()[0] and pygame.mouse.get_pos()[0] in range(self.__x-self.__width//2, self.__x+self.__width//2) and pygame.mouse.get_pos()[1] in range(self.__y-self.__height//2, self.__y+self.__height//2) and not self.__clicked and self.active:
             if self.__singleClick:
                 self.__clicked = True
@@ -127,5 +132,7 @@ class Button(pygame.sprite.Sprite):
                 pygame.mouse.set_pos(pygame.mouse.get_pos()[0] + 150, pygame.mouse.get_pos()[1])
                 time.sleep(0.1)
             return True
+        
+        # Otherwise Return False
         else:
             return False

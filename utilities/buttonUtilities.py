@@ -36,6 +36,7 @@ def buttonSetup(doubleSpeed:bool, levelStarted:bool, placingTurrets:bool, world:
         if turretType == "cannon":
             placingTurrets = False
 
+    # Only Showing Machine Laser Buy Button on Level 2 (and Beyond)
     if world.level >= 2:
         if world.money >= demoMachinelaser.cost:
             buyMachinelaserButton.MouseCheck(SCREEN)
@@ -69,7 +70,7 @@ def checkButtons(world:World, cursorTurret:Cannon|Machinelaser|None, selectedTur
     Function to check if main game button objects have been clicked and respond accordingly
     """
     
-    # Checking Buttons
+    # Handling Button Clicks
     if cancelButton.MouseClick():
         placingTurrets = False
         

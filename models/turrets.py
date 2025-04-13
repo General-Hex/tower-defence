@@ -101,16 +101,19 @@ class Turret(pygame.sprite.Sprite):
     # Updating Turret
     def update(self, allEnemiesGroup:pygame.sprite.Group, doubleSpeed:bool) -> None:
         """
-        Overiding method to update turret animation and fire turret
+        Method to update turret animation and fire turret
         """
 
+        # If the Turret has a Target Face the Target and Begin Shooting Animation
         if self.target:
             self.__updateAnimation()
         
+        # Otherwise if Cooldown is Finished Select New Target Within Range
         else:
             if pygame.time.get_ticks() - self.__lastShot > self.cooldown:
                 self.__selectTarget(allEnemiesGroup)
         
+        # Double/Undouble Turret Cooldown Speed as Required
         if doubleSpeed and not self.__doubleSpeed:
             self.cooldown = self.cooldown//2
             self.__doubleSpeed = True
@@ -129,10 +132,14 @@ class Turret(pygame.sprite.Sprite):
 
         # Selecting Living Target in Range
         for enemy in allEnemiesGroup:
+            # Checking that Enemy is Alive
             if enemy.health > 0:       
+                # Finding the Distance of the Enemy using Pythagorus
                 xDistance = enemy.pos[0] - self.x
                 yDistance = enemy.pos[1] - self.y
                 totalDistance = math.sqrt(xDistance**2 + yDistance**2)
+                
+                # Updating Turret Data if the Enemy is Within Range
                 if totalDistance < self.range:
                     self.target = enemy 
                     self.rotationAngle = math.degrees(math.atan2(-yDistance, xDistance))
@@ -164,6 +171,7 @@ class Turret(pygame.sprite.Sprite):
         
         self.originalImage = self.animationImages[self.imageIndex]
 
+        # Animating Turret with an Animation Delay using the Spite Sheet
         if pygame.time.get_ticks() - self.__updateTime >= ANIMATION_DELAY:
             self.__updateTime = pygame.time.get_ticks()
             if self.imageIndex < TURRET_ANIMATION_FRAMES - 1:
@@ -180,6 +188,7 @@ class Turret(pygame.sprite.Sprite):
         Method to upgrade turret's tier
         """
 
+        # Updating Turret Attributes Based on Upgrade Data
         self.tier += 1 
         self.range = self.data[self.tier-1].get("range")
         self.cooldown = self.data[self.tier-1].get("cooldown")
@@ -198,15 +207,16 @@ class Turret(pygame.sprite.Sprite):
     # Drawing Turret
     def draw(self, surface:pygame.surface.Surface) -> None:
         """
-        Overiding method to draw turret and range circle (if selected) on main game screen
+        Method to draw turret and range circle (if selected) on main game screen
         """
 
+        # Adding Turret to the Screen
         self.image = pygame.transform.rotate(self.originalImage, self.rotationAngle - 90)
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
 
         if self.selected:
-             surface.blit(self.__rangeImage, self.__rangeRect)
+            surface.blit(self.__rangeImage, self.__rangeRect)
         surface.blit(self.image, self.rect)
          
 class Cannon(Turret):
@@ -219,8 +229,10 @@ class Cannon(Turret):
         Cannon constructor
         """
 
+        # Initilising Parent Class
         super().__init__(tileX, tileY)
 
+        # Cannon Attributes
         self.data = [
             { "range": 90, "cooldown": 3000, "damage": 10}, # Tier 1
 
@@ -262,8 +274,10 @@ class Machinelaser(Turret):
         Machinelaser constructor
         """
 
+        # Initilising Parent Class
         super().__init__(tileX, tileY)
 
+        # Machinelaser Attributes
         self.data = [
             { "range": 75, "cooldown": 100, "damage": 1}, # Tier 1
 
@@ -303,10 +317,15 @@ def createTurret(mousePosition:tuple[int,int], allTurretsGroup:pygame.sprite.Gro
     Function to place a new turret on the game map
     """
 
+    # Defining Selected Tile
     tileX = mousePosition[0] // TILE_SIZE
     tileY = mousePosition[1] // TILE_SIZE
     mouseTileNum = tileY * TILE_ROWS + tileX 
+
+    # Ensuring Selected Tile is Placeable
     if world.tilemap[mouseTileNum] in GRASS_TILE_VALUES:
+        
+        # Ensuring Tile does not Already have a Turret Placed On It
         tileFree = True
         for turret in allTurretsGroup:
             if (tileX, tileY) == (turret.tileX, turret.tileY):
@@ -318,6 +337,7 @@ def createTurret(mousePosition:tuple[int,int], allTurretsGroup:pygame.sprite.Gro
             elif turretType == "machinelaser":
                 newTurret = Machinelaser(tileX, tileY)
 
+            # Subtracting Cost of Turret from World Money and Adding Turret to Group
             if world.money - newTurret.cost >= 0:
                 allTurretsGroup.add(newTurret)
                 world.money -= newTurret.cost
@@ -329,10 +349,12 @@ def selectTurret(mousePosition:tuple[int,int], allTurretsGroup:pygame.sprite.Gro
     """
     Function to handle selecting place turrets by clicking on them
     """
-
+    
+    # Defining Selected Tile
     tileX = mousePosition[0] // TILE_SIZE
     tileY = mousePosition[1] // TILE_SIZE
 
+    # Returning Turret on Selected Tile (if There is One)
     for turret in allTurretsGroup:
         if (tileX, tileY) == (turret.tileX, turret.tileY):
             return turret  
